@@ -3,11 +3,11 @@ package objects.elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class TestBox {
+public class TextBox {
 
     private WebDriver driver;
 
-    public TestBox(WebDriver driver) {
+    public TextBox(WebDriver driver) {
         this.driver = driver;
     }
 
