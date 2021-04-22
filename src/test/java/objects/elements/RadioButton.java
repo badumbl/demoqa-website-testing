@@ -1,4 +1,4 @@
-package test.elements;
+package objects.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

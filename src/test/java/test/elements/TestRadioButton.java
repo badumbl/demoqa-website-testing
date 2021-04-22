@@ -1,5 +1,6 @@
 package test.elements;
 
+import objects.elements.RadioButton;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
