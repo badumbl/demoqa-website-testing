@@ -20,7 +20,6 @@ public class TestTextBox extends HelperClass {
         tb = new TextBox(getDriver());
         tb.goToTextBox();
         tb.fillAndSubmit(fullName, email, address, permAddress);
-        System.out.println(getDriver().findElement(By.xpath("//p[@id='name']")).getText());
         Assert.assertEquals("Name:" + fullName, getDriver().findElement(By.xpath("//p[@id='name']")).getText());
         Assert.assertEquals("Email:" + email, getDriver().findElement(By.xpath("//p[@id='email']")).getText());
         Assert.assertEquals("Current Address :" + address, getDriver().findElement(By.xpath("//p[@id='currentAddress']")).getText());

@@ -7,6 +7,7 @@
             <class name="test.TestMainPage"/>
             <class name="test.elements.TestElements"/>
             <class name="test.elements.TestTextBox"/>
+            <class name="test.elements.TestCheckBox"/>
             <!-- <class name="test.bookStoreAppTest.TestBookStoreApp"/> -->
         </classes>
     </test> <!-- Test -->
