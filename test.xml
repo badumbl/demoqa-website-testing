@@ -11,6 +11,7 @@
             <class name="test.elements.TestRadioButton"/>
             <class name="test.elements.TestButtons"/>
             <class name="test.elements.TestWebTables"/>
+            <class name="test.elements.TestDynamicProperties"/>
             <!-- <class name="test.bookStoreAppTest.TestBookStoreApp"/> -->
         </classes>
     </test> <!-- Test -->

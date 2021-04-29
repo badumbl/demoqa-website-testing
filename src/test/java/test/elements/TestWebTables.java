@@ -2,8 +2,6 @@ package test.elements;
 
 import objects.elements.WebTables;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.HelperClass;
@@ -18,7 +16,6 @@ public class TestWebTables extends HelperClass {
     private String salary = "5000";
     private String department = "dept";
     private String editedDepartment = "department";
-    private Object NoSuchElementException;
 
     @Test(priority = 1)
     public void goToWebTables() {
