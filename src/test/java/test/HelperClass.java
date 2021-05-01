@@ -13,7 +13,7 @@ public class HelperClass {
 
     @BeforeTest
     public void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\ajva\\Downloads\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\ajva\\Downloads\\chromedriver_win32\\chromedriver.exe");
         HelperClass.driver = new ChromeDriver();
         HelperClass.driver.manage().window().maximize();
     }

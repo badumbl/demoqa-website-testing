@@ -7,12 +7,18 @@
             <class name="test.TestMainPage"/>
             <class name="test.elements.TestElements"/>
             <class name="test.elements.TestTextBox"/>
-            <class name="test.elements.TestCheckBox"/>
+           <!-- <class name="test.elements.TestCheckBox"/>
             <class name="test.elements.TestRadioButton"/>
-            <class name="test.elements.TestButtons"/>
             <class name="test.elements.TestWebTables"/>
-            <class name="test.elements.TestDynamicProperties"/>
+            <class name="test.elements.TestButtons"/>-->
+            <class name="test.elements.TestUploadAndDownload"/>
+           <!-- <class name="test.elements.TestDynamicProperties"/>-->
+        </classes>
+    </test> <!-- Test -->
+    <test name="Test Book Store">
+        <classes>
             <!-- <class name="test.bookStoreAppTest.TestBookStoreApp"/> -->
         </classes>
     </test> <!-- Test -->
+
 </suite>
