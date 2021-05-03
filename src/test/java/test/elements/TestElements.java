@@ -24,7 +24,7 @@ public class TestElements extends HelperClass {
         WebElement elem = getDriver().findElement(By.xpath("//span[contains(text(),'Text Box')]"));
         Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
                 .withTimeout(15, TimeUnit.SECONDS)
-                .pollingEvery(1, TimeUnit.SECONDS)
+                .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
         wait.until((WebDriver wd) -> elem.isDisplayed());
     }
