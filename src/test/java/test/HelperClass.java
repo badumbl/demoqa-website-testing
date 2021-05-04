@@ -2,7 +2,7 @@ package test;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 public class HelperClass {
 
@@ -20,6 +20,11 @@ public class HelperClass {
 
     public WebDriver getDriver() {
         return HelperClass.driver;
+    }
+
+    @AfterTest
+    public void afterSuite()  {
+      HelperClass.driver.quit();
     }
 
 }

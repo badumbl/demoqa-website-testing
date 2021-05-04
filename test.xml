@@ -16,6 +16,12 @@
             <class name="test.elements.TestUploadAndDownload"/>
             <class name="test.elements.TestDynamicProperties"/>
         </classes>
+    </test>
+    <test name="Test Practise Form">
+        <classes>
+            <class name="test.TestMainPage"/>
+            <class name="test.forms.TestPracticeForm"/>
+        </classes>
     </test> <!-- Test -->
     <test name="Test Book Store">
         <classes>
