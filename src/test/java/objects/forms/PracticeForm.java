@@ -37,7 +37,6 @@ public class PracticeForm {
         driver.findElement(By.xpath("//input[@id='dateOfBirthInput']")).click();
         driver.findElement(By.xpath("//option[contains(text(),'" + monthBirth + "')]")).click();
         driver.findElement(By.xpath("//option[contains(text(),'" + yearBirth + "')]")).click();
-        //TBU
         driver.findElement(By.xpath("//div[@class='react-datepicker__day react-datepicker__day--" + dayBirth + "']"))
                 .click();
         driver.findElement(By

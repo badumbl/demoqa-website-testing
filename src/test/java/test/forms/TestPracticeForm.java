@@ -2,12 +2,19 @@ package test.forms;
 
 import objects.forms.PracticeForm;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.HelperClass;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class TestPracticeForm extends HelperClass {
 
@@ -17,7 +24,6 @@ public class TestPracticeForm extends HelperClass {
     private String email = "email@test.com";
     private String gender = "Male";
     private String mobile = "1234567890";
-    //TBU
     private String dayBirth = "001";
     private String monthBirth = "January";
     private int yearBirth = 1988;
@@ -58,7 +64,6 @@ public class TestPracticeForm extends HelperClass {
         Assert.assertEquals(getDriver()
                         .findElement(By.xpath("//tr//td[contains(text(), 'Mobile')]//following::td")).getText(),
                 mobile);
-        //TBU
         Assert.assertEquals(getDriver()
                         .findElement(By.xpath("//tr//td[contains(text(), 'Date of Birth')]//following::td")).getText(),
                 "01 January,1988");
@@ -74,12 +79,21 @@ public class TestPracticeForm extends HelperClass {
         Assert.assertEquals(getDriver()
                         .findElement(By.xpath("//tr//td[contains(text(), 'State and City')]//following::td")).getText(),
                 state + " " + city);
+        getDriver().findElement(By.xpath("//*[@id='closeLargeModal']")).click();
     }
 
-    //TBU
     @Test(priority = 3)
-    public void fillTheFormIncorrectly() {
-
+    public void fillTheFormIncorrectly()  {
+        getDriver().findElement(By.xpath("//button[@id='submit']")).click();
+        //Thread.sleep(500);
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
+                .withTimeout(15, TimeUnit.SECONDS)
+                .pollingEvery(1, TimeUnit.MILLISECONDS)
+                .ignoring(NoSuchElementException.class);
+        wait.until((WebDriver) -> getDriver().findElement(By.xpath("//input[@id = 'userNumber']")).getCssValue("border-color").equals("rgb(220, 53, 69)"));
+        Assert.assertEquals(getDriver()
+                        .findElement(By.xpath("//input[@id = 'userNumber']")).getCssValue("border-color"),
+                "rgb(220, 53, 69)");
     }
 
     public String subjectsFormat() {
