@@ -24,7 +24,7 @@ public class HelperClass {
 
     @AfterTest
     public void afterSuite()  {
-     // HelperClass.driver.quit();
+     HelperClass.driver.quit();
     }
 
 }

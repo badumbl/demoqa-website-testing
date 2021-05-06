@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Practice Suite" verbose="1">
-   <!-- <test name="Test Elements">
+    <test name="Test Elements">
         <classes>
             <class name="test.TestMainPage"/>
             <class name="test.elements.TestElements"/>
@@ -16,17 +16,23 @@
             <class name="test.elements.TestUploadAndDownload"/>
             <class name="test.elements.TestDynamicProperties"/>
         </classes>
-    </test>-->
+    </test>
     <test name="Test Practise Form">
         <classes>
             <class name="test.TestMainPage"/>
             <class name="test.forms.TestPracticeForm"/>
         </classes>
-    </test> <!-- Test -->
-    <test name="Test Book Store">
+    </test>
+    <test name="Test Alerts, Frame and Windows">
         <classes>
-            <!-- <class name="test.bookStoreAppTest.TestBookStoreApp"/> -->
+            <class name="test.TestMainPage"/>
+            <class name="test.alertsFrameWindows.TestAlFrWi"/>
+            <class name="test.alertsFrameWindows.TestBrowserWindows"/>
         </classes>
-    </test> <!-- Test -->
-
+    </test>
+    <!--<test name="Test Book Store">
+        <classes>
+             <class name="test.bookStoreAppTest.TestBookStoreApp"/>
+        </classes>
+    </test> -->
 </suite>
