@@ -23,8 +23,8 @@ public class HelperClass {
     }
 
     @AfterTest
-    public void afterSuite()  {
-    // HelperClass.driver.quit();
+    public void afterSuite() {
+        HelperClass.driver.quit();
     }
 
 }

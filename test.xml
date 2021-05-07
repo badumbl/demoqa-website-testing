@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Practice Suite" verbose="1">
-   <!-- <test name="Test Elements">
+    <test name="Test Elements">
         <classes>
             <class name="test.TestMainPage"/>
             <class name="test.elements.TestElements"/>
@@ -22,7 +22,7 @@
             <class name="test.TestMainPage"/>
             <class name="test.forms.TestPracticeForm"/>
         </classes>
-    </test>-->
+    </test>
     <test name="Test Alerts, Frame and Windows">
         <classes>
             <class name="test.TestMainPage"/>
