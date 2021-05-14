@@ -29,6 +29,9 @@
             <class name="test.alertsFrameWindows.TestAlFrWi"/>
             <class name="test.alertsFrameWindows.TestBrowserWindows"/>
             <class name="test.alertsFrameWindows.TestAlerts"/>
+            <class name="test.alertsFrameWindows.TestFrames"/>
+            <class name="test.alertsFrameWindows.TestNestedFrames"/>
+            <class name="test.alertsFrameWindows.TestModalDialogs"/>
         </classes>
     </test>
     <!--<test name="Test Book Store">
