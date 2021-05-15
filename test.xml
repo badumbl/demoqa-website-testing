@@ -34,6 +34,15 @@
             <class name="test.alertsFrameWindows.TestModalDialogs"/>
         </classes>
     </test>
+    <test name="Widgets">
+        <classes>
+            <class name="test.TestMainPage"/>
+            <class name="test.widgets.TestWidgets"/>
+            <class name="test.widgets.TestAccordian"/>
+            <class name="test.widgets.TestAutoComplete"/>
+
+        </classes>
+    </test>
     <!--<test name="Test Book Store">
         <classes>
              <class name="test.bookStoreAppTest.TestBookStoreApp"/>

@@ -9,8 +9,10 @@ public class MainPage {
 
     private WebDriver driver;
 
+
     public MainPage(WebDriver driver) {
         this.driver = driver;
+
     }
 
     public void init() {

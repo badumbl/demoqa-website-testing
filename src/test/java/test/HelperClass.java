@@ -1,14 +1,12 @@
 package test;
 
-import org.junit.BeforeClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 
 public class HelperClass {
@@ -37,7 +35,7 @@ public class HelperClass {
 
     @AfterTest
     public void afterSuite() {
-        HelperClass.driver.quit();
+      //  HelperClass.driver.quit();
     }
 
 }
