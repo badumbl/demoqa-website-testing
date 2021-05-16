@@ -27,7 +27,7 @@ public class TestBrowserWindows extends HelperClass {
         bw.newTab();
         ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs.get(1));
-        Assert.assertEquals(getDriver().getCurrentUrl(),"https://demoqa.com/sample");
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/sample");
         getDriver().close();
         getDriver().switchTo().window(tabs.get(0));
     }
@@ -37,7 +37,7 @@ public class TestBrowserWindows extends HelperClass {
         bw.newWindow();
         ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs.get(1));
-        Assert.assertEquals(getDriver().getCurrentUrl(),"https://demoqa.com/sample");
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/sample");
         getDriver().close();
         getDriver().switchTo().window(tabs.get(0));
     }

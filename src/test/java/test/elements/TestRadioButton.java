@@ -15,19 +15,21 @@ public class TestRadioButton extends HelperClass {
         rb = new RadioButton(getDriver());
         rb.goToRadio();
     }
+
     @Test(priority = 2)
-    public void checkYesButton(){
+    public void checkYesButton() {
         rb.checkYes();
         Assert.assertEquals("Yes", getDriver().findElement(By.xpath("//span[@class='text-success']")).getText());
     }
+
     @Test(priority = 3)
-    public void checkImpressiveButton(){
+    public void checkImpressiveButton() {
         rb.checkImpr();
         Assert.assertEquals("Impressive", getDriver().findElement(By.xpath("//span[@class='text-success']")).getText());
     }
 
     @Test(priority = 4)
-    public void checkNoButton(){
+    public void checkNoButton() {
         rb.checkNo();
         Assert.assertNotEquals("No", getDriver().findElement(By.xpath("//span[@class='text-success']")).getText());
     }

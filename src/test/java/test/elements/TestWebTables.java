@@ -38,7 +38,7 @@ public class TestWebTables extends HelperClass {
     }
 
     @Test(priority = 4)
-    public void search(){
+    public void search() {
         wb.search(lastName);
         Assert.assertEquals(lastName, getDriver().findElement(By.xpath("//div[text()='" + lastName + "']")).getText());
     }

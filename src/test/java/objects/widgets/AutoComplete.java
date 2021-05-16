@@ -43,7 +43,7 @@ public class AutoComplete {
 
     }
 
-    public void selectOption(Integer i){
+    public void selectOption(Integer i) {
         list.get(i).click();
     }
 

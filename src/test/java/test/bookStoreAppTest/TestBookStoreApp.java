@@ -14,7 +14,7 @@ public class TestBookStoreApp extends HelperClass {
     public void goToElements() throws InterruptedException {
         bsa = new BookStoreApp(getDriver());
         bsa.goToBookStoreApp();
-       // tb.existingUser("username", "password");
-        bsa.createNewUser("1","2","3","4");
+        // tb.existingUser("username", "password");
+        bsa.createNewUser("1", "2", "3", "4");
     }
 }

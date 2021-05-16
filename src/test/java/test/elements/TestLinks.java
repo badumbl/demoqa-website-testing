@@ -23,7 +23,7 @@ public class TestLinks extends HelperClass {
     }
 
     @Test(priority = 2)
-    public void linksNewTab()  {
+    public void linksNewTab() {
         li.newTabLink();
         ArrayList<String> tabs2 = new ArrayList<String>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs2.get(1));

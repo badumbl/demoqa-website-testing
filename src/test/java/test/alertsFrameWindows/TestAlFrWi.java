@@ -10,12 +10,12 @@ public class TestAlFrWi extends HelperClass {
     private AlFrWi afw;
 
     @BeforeClass
-    public void init(){
+    public void init() {
         afw = new AlFrWi(getDriver());
     }
 
     @Test
-    public void goToPage(){
+    public void goToPage() {
         afw.go();
     }
 

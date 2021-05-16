@@ -81,14 +81,15 @@ public class TestPracticeForm extends HelperClass {
     }
 
     @Test(priority = 3)
-    public void fillTheFormIncorrectly()  {
+    public void fillTheFormIncorrectly() {
         getDriver().findElement(By.xpath("//button[@id='submit']")).click();
         //Thread.sleep(500);
         Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
                 .withTimeout(15, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
-        wait.until((WebDriver) -> getDriver().findElement(By.xpath("//input[@id = 'userNumber']")).getCssValue("border-color").equals("rgb(220, 53, 69)"));
+        wait.until((WebDriver) -> getDriver().findElement(By.xpath("//input[@id = 'userNumber']"))
+                .getCssValue("border-color").equals("rgb(220, 53, 69)"));
         Assert.assertEquals(getDriver()
                         .findElement(By.xpath("//input[@id = 'userNumber']")).getCssValue("border-color"),
                 "rgb(220, 53, 69)");

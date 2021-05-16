@@ -22,7 +22,8 @@ public class Frames {
     public void small() {
         driver.switchTo().frame("frame2");
     }
-    public void mainFrame(){
+
+    public void mainFrame() {
         driver.switchTo().parentFrame();
     }
 }

@@ -10,12 +10,12 @@ public class TestWidgets extends HelperClass {
     private Widgets wi;
 
     @BeforeClass
-    public void init(){
+    public void init() {
         wi = new Widgets(getDriver());
     }
 
     @Test
-    public void goToWidgets(){
+    public void goToWidgets() {
         wi.go();
     }
 }

@@ -22,7 +22,7 @@ public class Accordian {
     }
 
     public void whereDoes() {
-       driver.findElement(By.xpath("//div[@id='section2Heading']")).click();
+        driver.findElement(By.xpath("//div[@id='section2Heading']")).click();
     }
 
     public void whyDo() {

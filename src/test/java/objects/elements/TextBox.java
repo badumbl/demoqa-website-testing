@@ -11,7 +11,7 @@ public class TextBox {
         this.driver = driver;
     }
 
-    public void fillAndSubmit(String fullName, String email, String address, String permAddress){
+    public void fillAndSubmit(String fullName, String email, String address, String permAddress) {
         driver.findElement(By.xpath("//input[@id='userName']")).sendKeys(fullName);
         driver.findElement(By.xpath("//input[@id='userEmail']")).sendKeys(email);
         driver.findElement(By.xpath("//textarea[@id='currentAddress']")).sendKeys(address);
