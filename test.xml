@@ -44,6 +44,7 @@
             <class name="test.widgets.TestSlider"/>
             <class name="test.widgets.TestProgressBar"/>
             <class name="test.widgets.TestTabs"/>
+            <class name="test.widgets.TestToolTips"/>
 
         </classes>
     </test>
