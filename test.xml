@@ -41,6 +41,9 @@
             <class name="test.widgets.TestAccordian"/>
             <class name="test.widgets.TestAutoComplete"/>
             <class name="test.widgets.TestDatePicker"/>
+            <class name="test.widgets.TestSlider"/>
+            <class name="test.widgets.TestProgressBar"/>
+            <class name="test.widgets.TestTabs"/>
 
         </classes>
     </test>
