@@ -1,6 +1,8 @@
 package test.elements;
 
+
 import objects.elements.Links;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,7 +20,7 @@ public class TestLinks extends HelperClass {
     }
 
     @Test(priority = 1)
-    public void goToLinks() {
+    public void goToLinks()  {
         li.start();
     }
 
@@ -30,8 +32,5 @@ public class TestLinks extends HelperClass {
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/");
         getDriver().close();
         getDriver().switchTo().window(tabs2.get(0));
-
-
     }
-
 }

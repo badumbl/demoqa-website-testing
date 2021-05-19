@@ -1,5 +1,8 @@
 package test.elements;
 
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import objects.elements.BrokenLinksImages;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -40,18 +43,25 @@ public class TestBrokenLinksImages extends HelperClass {
 
     @Test(priority = 2)
     public void testLinks() {
-        int iBrokenLinkCount = 0;
+        /*RestAssured.baseURI = getDriver().getCurrentUrl();
+        RequestSpecification httpRequest = RestAssured.given();
+        Response response = httpRequest.get(getDriver().findElement(By
+                .xpath("//a[contains(text(),'Click Here for Broken Link')]"))
+                .getAttribute("href"));
+        int statusCode = response.getStatusCode();
+        Assert.assertEquals(statusCode, 500);*/
 
+        int iBrokenLinkCount = 0;
         try {
             List<WebElement> link_list = driver.findElements(By.xpath("//a"));
-            /* Print the total number of links on the page */
+            // Print the total number of links on the page
             System.out.println("The page under test has " + link_list.size() + " links");
             for (WebElement link : link_list) {
                 if (link != null) {
                     HttpClient client = HttpClientBuilder.create().build();
                     HttpGet request = new HttpGet(link.getAttribute("href"));
                     HttpResponse response = client.execute(request);
-                    /* For valid links, the HttpStatus will be 200 */
+                    // For valid links, the HttpStatus will be 200
                     if (response.getStatusLine().getStatusCode() != 200) {
                         System.out.println("'" + link.getText() + "'" + " - is broken "
                                 + "(" + link.getAttribute("href") + ")");

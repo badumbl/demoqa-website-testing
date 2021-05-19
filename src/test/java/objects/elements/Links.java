@@ -22,3 +22,5 @@ public class Links {
         driver.findElement(By.xpath("//a[@id='simpleLink']")).click();
     }
 }
+
+
