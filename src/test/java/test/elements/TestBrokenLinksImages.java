@@ -1,8 +1,5 @@
 package test.elements;
 
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import objects.elements.BrokenLinksImages;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

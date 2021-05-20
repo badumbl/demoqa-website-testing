@@ -6,18 +6,18 @@
         <classes>
             <class name="test.TestMainPage"/>
             <class name="test.elements.TestElements"/>
-          <!--  <class name="test.elements.TestTextBox"/>
+            <class name="test.elements.TestTextBox"/>
             <class name="test.elements.TestCheckBox"/>
             <class name="test.elements.TestRadioButton"/>
             <class name="test.elements.TestWebTables"/>
-            <class name="test.elements.TestButtons"/>-->
-          <!--  <class name="test.elements.TestLinks"/>-->
+            <class name="test.elements.TestButtons"/>
+            <class name="test.elements.TestLinks"/>
             <class name="test.elements.TestBrokenLinksImages"/>
-            <!--<class name="test.elements.TestUploadAndDownload"/>
-            <class name="test.elements.TestDynamicProperties"/>-->
+            <class name="test.elements.TestUploadAndDownload"/>
+            <class name="test.elements.TestDynamicProperties"/>
         </classes>
     </test>
-   <!-- <test name="Test Practise Form">
+    <test name="Test Practise Form">
         <classes>
             <class name="test.TestMainPage"/>
             <class name="test.forms.TestPracticeForm"/>
@@ -46,7 +46,7 @@
             <class name="test.widgets.TestTabs"/>
             <class name="test.widgets.TestToolTips"/>
         </classes>
-    </test>-->
+    </test>
     <!--<test name="Test Book Store">
         <classes>
              <class name="test.bookStoreAppTest.TestBookStoreApp"/>

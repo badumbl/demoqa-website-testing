@@ -14,8 +14,8 @@ public class MainPage {
 
     }
 
-    public void init() {
-        driver.get("https://demoqa.com/");
+    public void init(String testLink) {
+        driver.get(testLink);
     }
 
     public void goToElement(String elem) {
