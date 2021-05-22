@@ -45,6 +45,7 @@
             <class name="test.widgets.TestProgressBar"/>
             <class name="test.widgets.TestTabs"/>
             <class name="test.widgets.TestToolTips"/>
+            <class name="test.widgets.TestSelectMenus"/>
         </classes>
     </test>
     <!--<test name="Test Book Store">
