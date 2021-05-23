@@ -29,6 +29,9 @@ public class SelectMenus {
 
     public WebElement selectValueChoose(String selectValueOption) {
         list = driver.findElements(By.xpath("//div[@class=' css-11unzgr']//child::div[@tabindex='-1']"));
+        for (WebElement elem : list) {
+            System.out.println(elem.getText());
+        }
         return helpIterate(selectValueOption, list);
     }
 
@@ -48,11 +51,8 @@ public class SelectMenus {
     }
 
     public WebElement multiSelect() {
-       // return driver.findElement(By.xpath("//div[contains(text(),'Select...')]"));
-        return null;
-    }
+        return driver.findElement(By.xpath("//div[contains(text(),'Select...')]"));
 
-    public void multiSelectChoose(String selectValueOption) {
     }
 
     public WebElement standartMulti() {

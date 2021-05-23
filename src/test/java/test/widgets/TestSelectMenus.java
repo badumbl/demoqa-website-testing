@@ -3,6 +3,7 @@ package test.widgets;
 import objects.widgets.SelectMenus;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,6 +19,8 @@ public class TestSelectMenus extends HelperClass {
     private String selectOldOption = "Indigo";
     private String selectStandardMultiOption1 = "Saab";
     private String selectStandardMultiOption2 = "Audi";
+    private String selectMulti1 = "Green";
+    private String selectMulti2 = "Black";
 
     @BeforeClass
     public void init() {
@@ -37,37 +40,29 @@ public class TestSelectMenus extends HelperClass {
     public void selectValueMenu() {
         jse.executeScript("arguments[0].scrollIntoView();", me.selectValue());
         action.moveToElement(me.selectValue()).click().perform();
-        if (me.selectValueChoose(selectValueOption) != null) {
-            me.selectValueChoose(selectValueOption).click();
-        } else {
-            System.out.println("Element not found");
-        }
+        multiSelectHelper(me.selectValueChoose(selectValueOption));
     }
 
     @Test(priority = 3)
     public void selectOneMenu() {
         action.moveToElement(me.selectOne()).click().perform();
-        if (me.selectValueChoose(selectOneOption) != null) {
-            me.selectValueChoose(selectOneOption).click();
-        } else {
-            System.out.println("Element not found");
-        }
+        multiSelectHelper(me.selectValueChoose(selectOneOption));
     }
 
     @Test(priority = 3)
     public void oldStyleSelectMenu() {
         action.moveToElement(me.oldStyle()).click().perform();
-        if (me.selectOldStyle(selectOldOption) != null) {
-            me.selectOldStyle(selectOldOption).click();
-        } else {
-            System.out.println("Element not found");
-        }
+        multiSelectHelper(me.selectOldStyle(selectOldOption));
 
     }
 
-    @Test(priority = 3)
+
+    @Test(priority = 4)
     public void multiSelectMenu() {
-        //   me.multiSelect();
+        action.moveToElement(me.multiSelect()).click().perform();
+        multiSelectHelper(me.selectValueChoose(selectMulti1));
+        multiSelectHelper(me.selectValueChoose(selectMulti2));
+        action.sendKeys(Keys.ESCAPE).perform();
     }
 
     @Test(priority = 3)
@@ -81,6 +76,14 @@ public class TestSelectMenus extends HelperClass {
                     .click()
                     .release()
                     .perform();
+        } else {
+            System.out.println("Element not found");
+        }
+    }
+
+    private void multiSelectHelper(WebElement webElement2) {
+        if (webElement2 != null) {
+            webElement2.click();
         } else {
             System.out.println("Element not found");
         }
