@@ -1,6 +1,7 @@
 package test.elements;
 
 import objects.elements.DynamicProperties;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,7 +24,10 @@ public class TestDynamicProperties extends HelperClass {
 
     @Test(priority = 1)
     public void goToDynamicProperties() {
-        dp.goToDp();
+        //Scroll is needed, because footer blocks button on smaller monitors
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("window.scrollBy(0,250)");
+        dp.goToDp().click();
     }
 
    /* @Test(priority = 2)

@@ -14,12 +14,12 @@ public class Links {
         this.driver = driver;
     }
 
-    public void start() {
-        driver.findElement(By.xpath("//span[contains(text(),'Links')]")).click();
+    public WebElement start() {
+        return driver.findElement(By.xpath("//span[contains(text(),'Links')]"));
     }
 
-    public void newTabLink() {
-        driver.findElement(By.xpath("//a[@id='simpleLink']")).click();
+    public WebElement newTabLink() {
+        return driver.findElement(By.xpath("//a[@id='simpleLink']"));
     }
 }
 

@@ -1,5 +1,7 @@
 package test;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,8 +14,11 @@ import org.testng.annotations.BeforeTest;
 public class HelperClass {
 
     private static WebDriver driver;
+    private String url = "https://demoqa.com/";
+    private JavascriptExecutor jse;
 
     public HelperClass() {
+
     }
 
     @BeforeTest
@@ -21,6 +26,7 @@ public class HelperClass {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\ajva\\Downloads\\chromedriver_win32\\chromedriver.exe");
         HelperClass.driver = new ChromeDriver();
         HelperClass.driver.manage().window().maximize();
+        driver.get(url);
     }
 
 
@@ -31,6 +37,13 @@ public class HelperClass {
 
     public WebDriver getDriver() {
         return HelperClass.driver;
+    }
+
+    public void passMainPage() {
+        //Scroll is needed, because footer blocks button on smaller monitors
+        jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,250)");
+        driver.findElement(By.xpath("//h5[contains(text(),'Book Store Application')]")).click();
     }
 
     @AfterTest

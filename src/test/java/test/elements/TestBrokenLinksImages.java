@@ -6,6 +6,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -23,14 +24,16 @@ public class TestBrokenLinksImages extends HelperClass {
 
     @BeforeClass
     public void init() {
-
         driver = getDriver();
         bli = new BrokenLinksImages(driver);
     }
 
     @Test(priority = 1)
     public void goToBrokenLinksAndImages() {
-        bli.goToBrokenLinks();
+        //Scroll is needed, because footer blocks button on smaller monitors
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,250)");
+        bli.goToBrokenLinks().click();
     }
 
     @Test(priority = 2)

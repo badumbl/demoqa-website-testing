@@ -20,12 +20,12 @@ public class TestLinks extends HelperClass {
 
     @Test(priority = 1)
     public void goToLinks()  {
-        li.start();
+        li.start().click();
     }
 
     @Test(priority = 2)
     public void linksNewTab() {
-        li.newTabLink();
+        li.newTabLink().click();
         ArrayList<String> tabs2 = new ArrayList<String>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs2.get(1));
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/");

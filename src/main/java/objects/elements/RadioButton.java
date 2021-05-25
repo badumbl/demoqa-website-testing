@@ -2,6 +2,7 @@ package objects.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class RadioButton {
 
@@ -11,19 +12,19 @@ public class RadioButton {
         this.driver = driver;
     }
 
-    public void goToRadio() {
-        driver.findElement(By.xpath("//span[contains(text(),'Radio Button')]")).click();
+    public WebElement goToRadio() {
+       return driver.findElement(By.xpath("//span[contains(text(),'Radio Button')]"));
     }
 
-    public void checkYes() {
-        driver.findElement(By.xpath("//label[contains(text(),'Yes')]")).click();
+    public WebElement checkYes() {
+        return driver.findElement(By.xpath("//label[contains(text(),'Yes')]"));
     }
 
-    public void checkImpr() {
-        driver.findElement(By.xpath("//label[contains(text(),'Impressive')]")).click();
+    public WebElement checkImpr() {
+        return driver.findElement(By.xpath("//label[contains(text(),'Impressive')]"));
     }
 
-    public void checkNo() {
-        driver.findElement(By.xpath("//label[contains(text(),'No')]")).click();
+    public WebElement checkNo() {
+        return  driver.findElement(By.xpath("//label[contains(text(),'No')]"));
     }
 }

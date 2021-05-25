@@ -2,6 +2,7 @@ package objects.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class CheckBox {
 
@@ -11,8 +12,8 @@ public class CheckBox {
         this.driver = driver;
     }
 
-    public void goToCheckBox() {
-        driver.findElement(By.xpath("//span[contains(text(),'Check Box')]")).click();
+    public WebElement goToCheckBox() {
+       return  driver.findElement(By.xpath("//span[contains(text(),'Check Box')]"));
     }
 
 

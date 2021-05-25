@@ -2,6 +2,7 @@ package objects.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class ElementsMenu {
     private final WebDriver driver;
@@ -10,8 +11,8 @@ public class ElementsMenu {
         this.driver = driver;
     }
 
-    public void goToElementsMenu() {
-        driver.findElement(By.xpath("//div[contains(text(),'Elements')]")).click();
+    public WebElement goToElementsMenu() {
+       return driver.findElement(By.xpath("//div[contains(text(),'Elements')]"));
     }
 }
 

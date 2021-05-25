@@ -2,6 +2,7 @@ package objects.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class TextBox {
 
@@ -11,15 +12,29 @@ public class TextBox {
         this.driver = driver;
     }
 
-    public void fillAndSubmit(String fullName, String email, String address, String permAddress) {
-        driver.findElement(By.xpath("//input[@id='userName']")).sendKeys(fullName);
-        driver.findElement(By.xpath("//input[@id='userEmail']")).sendKeys(email);
-        driver.findElement(By.xpath("//textarea[@id='currentAddress']")).sendKeys(address);
-        driver.findElement(By.xpath("//textarea[@id='permanentAddress']")).sendKeys(permAddress);
-        driver.findElement(By.xpath("//button[@id='submit']")).click();
+    public WebElement goToTextBox() {
+        return driver.findElement(By.xpath("//span[contains(text(),'Text Box')]"));
     }
 
-    public void goToTextBox() {
-        driver.findElement(By.xpath("//span[contains(text(),'Text Box')]")).click();
+    public WebElement name() {
+        return driver.findElement(By.xpath("//input[@id='userName']"));
     }
+
+    public WebElement email() {
+        return driver.findElement(By.xpath("//input[@id='userEmail']"));
+    }
+
+    public WebElement address() {
+        return driver.findElement(By.xpath("//textarea[@id='currentAddress']"));
+    }
+
+    public WebElement permAddress() {
+        return driver.findElement(By.xpath("//textarea[@id='permanentAddress']"));
+    }
+
+    public WebElement submitButton() {
+        return driver.findElement(By.xpath("//button[@id='submit']"));
+    }
+
+
 }

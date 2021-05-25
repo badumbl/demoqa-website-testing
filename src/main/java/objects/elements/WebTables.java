@@ -2,6 +2,7 @@ package objects.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class WebTables {
 
@@ -11,12 +12,12 @@ public class WebTables {
         this.driver = driver;
     }
 
-    public void goToTables() {
-        driver.findElement(By.xpath("//span[contains(text(),'Web Tables')]")).click();
+    public WebElement goToTables() {
+        return driver.findElement(By.xpath("//span[contains(text(),'Web Tables')]"));
     }
 
-    public void addButton() {
-        driver.findElement(By.xpath("//button[@id='addNewRecordButton']")).click();
+    public WebElement addButton() {
+        return driver.findElement(By.xpath("//button[@id='addNewRecordButton']"));
     }
 
     public void register(String firstName, String lastName, String email, String age, String salary, String department) {
@@ -26,24 +27,29 @@ public class WebTables {
         driver.findElement(By.xpath("//input[@id='age']")).sendKeys(age);
         driver.findElement(By.xpath("//input[@id='salary']")).sendKeys(salary);
         driver.findElement(By.xpath("//input[@id='department']")).sendKeys(department);
-        driver.findElement(By.xpath("//button[@id='submit']")).click();
+
     }
 
-    public void editDept(String department, String editedDepartment) {
-        driver.findElement(By.xpath("//div[text()='" + department + "']/..//span[@class='mr-2']")).click();
+    public void editDept(String editedDepartment) {
         driver.findElement(By.xpath("//input[@id='department']")).clear();
         driver.findElement(By.xpath("//input[@id='department']")).sendKeys(editedDepartment);
-        driver.findElement(By.xpath("//button[@id='submit']")).click();
     }
 
 
-    public void search(String lastName) {
-        driver.findElement(By.xpath("//input[@id='searchBox']")).sendKeys(lastName);
+    public WebElement search() {
+        return driver.findElement(By.xpath("//input[@id='searchBox']"));
     }
 
-    public void delete(String firstName) {
-        driver.findElement(By.xpath("//div[text()='" + firstName + "']/..//span[@title='Delete']")).click();
+    public WebElement delete(String firstName) {
+        return driver.findElement(By.xpath("//div[text()='" + firstName + "']/..//span[@title='Delete']"));
     }
 
+    public WebElement submitBtn() {
+        return driver.findElement(By.xpath("//button[@id='submit']"));
+    }
+
+    public WebElement editBtn(String department) {
+        return driver.findElement(By.xpath("//div[text()='" + department + "']/..//span[@class='mr-2']"));
+    }
 
 }

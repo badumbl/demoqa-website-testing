@@ -2,6 +2,7 @@ package test.elements;
 
 import objects.elements.UploadAndDownload;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -29,13 +30,16 @@ public class TestUploadAndDownload extends HelperClass {
 
     @Test(priority = 1)
     public void goToUploadAndDownload() {
-        ud.goToUplAndDown();
+        //Scroll is needed, because footer blocks button on smaller monitors
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("window.scrollBy(0,250)");
+        ud.goToUplAndDown().click();
 
     }
 
     @Test(priority = 2)
     public void download() {
-        ud.download();
+        ud.download().click();
         Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
                 .withTimeout(15, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
@@ -52,7 +56,7 @@ public class TestUploadAndDownload extends HelperClass {
 
     @Test(priority = 3)
     public void upload() {
-        ud.upload(toBeDeleted);
+        ud.upload().sendKeys(toBeDeleted);
         Assert.assertEquals(getDriver().findElement(By.xpath("//p[@id='uploadedFilePath']")).getText(),
                 "C:\\fakepath\\" + fileName);
         Assert.assertTrue(f.delete());
