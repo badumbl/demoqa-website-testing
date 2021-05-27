@@ -18,7 +18,7 @@ public class TestNestedFrames extends HelperClass {
 
     @Test(priority = 1)
     public void goToNestedFrames() {
-        nf.goTo();
+        nf.goTo().click();
     }
 
     @Test(priority = 2)

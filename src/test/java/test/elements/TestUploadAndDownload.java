@@ -40,7 +40,7 @@ public class TestUploadAndDownload extends HelperClass {
     @Test(priority = 2)
     public void download() {
         ud.download().click();
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
+        Wait<WebDriver> wait = new FluentWait<>(getDriver())
                 .withTimeout(15, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);

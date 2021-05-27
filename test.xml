@@ -23,13 +23,11 @@
     </test>
     <test name="Test Practise Form">
         <classes>
-            <class name="test.TestMainPage"/>
             <class name="test.forms.TestPracticeForm"/>
         </classes>
     </test>
     <test name="Test Alerts, Frame and Windows">
         <classes>
-            <class name="test.TestMainPage"/>
             <class name="test.alertsFrameWindows.TestAlFrWi"/>
             <class name="test.alertsFrameWindows.TestBrowserWindows"/>
             <class name="test.alertsFrameWindows.TestAlerts"/>
@@ -40,7 +38,6 @@
     </test>
     <test name="Widgets">
         <classes>
-            <class name="test.TestMainPage"/>
             <class name="test.widgets.TestWidgets"/>
             <class name="test.widgets.TestAccordian"/>
             <class name="test.widgets.TestAutoComplete"/>
@@ -52,9 +49,9 @@
             <class name="test.widgets.TestSelectMenus"/>
         </classes>
     </test>
-    <!--  <test name="Test Book Store">
+      <test name="Test Book Store">
           <classes>
                <class name="test.bookStoreAppTest.TestBookStoreApp"/>
           </classes>
-      </test>-->
+      </test>
 </suite>

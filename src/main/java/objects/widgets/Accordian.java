@@ -13,19 +13,18 @@ public class Accordian {
     }
 
     public WebElement go() {
-        WebElement elem = driver.findElement(By.xpath("//span[contains(text(),'Accordian')]"));
-        return elem;
+        return driver.findElement(By.xpath("//span[contains(text(),'Accordian')]"));
     }
 
-    public void whatIs() {
-        driver.findElement(By.xpath("//div[@id='section1Heading']")).click();
+    public WebElement whatIs() {
+        return driver.findElement(By.xpath("//div[@id='section1Heading']"));
     }
 
-    public void whereDoes() {
-        driver.findElement(By.xpath("//div[@id='section2Heading']")).click();
+    public WebElement whereDoes() {
+        return driver.findElement(By.xpath("//div[@id='section2Heading']"));
     }
 
-    public void whyDo() {
-        driver.findElement(By.xpath("//div[@id='section3Heading']")).click();
+    public WebElement whyDo() {
+        return driver.findElement(By.xpath("//div[@id='section3Heading']"));
     }
 }

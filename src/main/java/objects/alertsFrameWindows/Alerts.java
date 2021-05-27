@@ -2,6 +2,7 @@ package objects.alertsFrameWindows;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class Alerts {
 
@@ -11,31 +12,25 @@ public class Alerts {
         this.driver = driver;
     }
 
-    public void goAlerts() {
-        driver.findElement(By.xpath("//span[contains(text(),'Alerts')]")).click();
+    public WebElement goAlerts() {
+        return driver.findElement(By.xpath("//span[contains(text(),'Alerts')]"));
     }
 
-    public void alert() {
-        driver.findElement(By.xpath("//button[@id='alertButton']")).click();
+    public WebElement alert() {
+        return driver.findElement(By.xpath("//button[@id='alertButton']"));
     }
 
-    public void alertFive() {
-        driver.findElement(By.xpath("//button[@id='timerAlertButton']")).click();
+    public WebElement alertFive() {
+        return driver.findElement(By.xpath("//button[@id='timerAlertButton']"));
     }
 
-    public void alertConfirm() {
-        driver.findElement(By.xpath("//button[@id='confirmButton']")).click();
+    public WebElement alertConfirm() {
+        return  driver.findElement(By.xpath("//button[@id='confirmButton']"));
     }
 
-    public void alertPrompt() {
-        driver.findElement(By.xpath("//button[@id='promtButton']")).click();
+    public WebElement alertPrompt() {
+        return driver.findElement(By.xpath("//button[@id='promtButton']"));
     }
 
-    public void acceptAlert() {
-        driver.switchTo().alert().accept();
-    }
 
-    public void declineAlert() {
-        driver.switchTo().alert().dismiss();
-    }
 }

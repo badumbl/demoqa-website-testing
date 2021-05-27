@@ -27,21 +27,21 @@ public class TestAccordian extends HelperClass {
 
     @Test(priority = 3)
     public void whatIsLorem() {
-        acc.whatIs();
+        acc.whatIs().click();
         waitCollapsed("//div[@id='section1Heading']/following-sibling::div");
         Assert.assertTrue(getDriver().findElement(By.xpath("//div[@id='section1Content']//p")).isDisplayed());
     }
 
     @Test(priority = 2)
     public void whereDoesLorem() {
-        acc.whereDoes();
+        acc.whereDoes().click();
         waitCollapsed("//div[@id='section2Heading']/following-sibling::div");
         Assert.assertTrue(getDriver().findElement(By.xpath("//div[@id='section2Content']//p")).isDisplayed());
     }
 
     @Test(priority = 2)
     public void whyDoLorem() {
-        acc.whyDo();
+        acc.whyDo().click();
         waitCollapsed("//div[@id='section3Heading']/following-sibling::div");
         Assert.assertTrue(getDriver().findElement(By.xpath("//div[@id='section3Content']//p")).isDisplayed());
     }

@@ -44,6 +44,7 @@ public class HelperClass {
         jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,250)");
         driver.findElement(By.xpath("//h5[contains(text(),'Book Store Application')]")).click();
+        jse.executeScript("window.scrollBy(0,0)");
     }
 
     @AfterTest

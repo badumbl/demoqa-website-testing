@@ -31,7 +31,7 @@ public class TestDatePicker extends HelperClass {
     @BeforeClass
     public void init() {
         this.dp = new DatePicker(getDriver());
-        wait = new FluentWait<WebDriver>(getDriver())
+        wait = new FluentWait<>(getDriver())
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
@@ -40,7 +40,7 @@ public class TestDatePicker extends HelperClass {
     @Test(priority = 1)
     public void goTo() {
         wait.until((WebDriver wb) -> getDriver().findElement(By.xpath("//span[contains(text(),'Date Picker')]")).isDisplayed());
-        dp.go();
+        dp.go().click();
         wait.until((WebDriver wb) -> getDriver().findElement(By.xpath("//input[@id='datePickerMonthYearInput']")).isDisplayed());
     }
 

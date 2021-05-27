@@ -19,13 +19,13 @@ public class TestBrowserWindows extends HelperClass {
 
     @Test(priority = 1)
     public void goTo() {
-        bw.go();
+        bw.go().click();
     }
 
     @Test(priority = 2)
     public void newTabButton() {
-        bw.newTab();
-        ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
+        bw.newTab().click();
+        ArrayList<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs.get(1));
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/sample");
         getDriver().close();
@@ -34,8 +34,8 @@ public class TestBrowserWindows extends HelperClass {
 
     @Test(priority = 2)
     public void newWindowButton() {
-        bw.newWindow();
-        ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
+        bw.newWindow().click();
+        ArrayList<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs.get(1));
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/sample");
         getDriver().close();
@@ -45,7 +45,7 @@ public class TestBrowserWindows extends HelperClass {
     //TBU
     @Test(priority = 2)
     public void newWindowMessageButton() {
-       /* bw.newWindowMessage();
+       /* bw.newWindowMessage().click();
         ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs.get(1));
         Assert.assertEquals(getDriver().getCurrentUrl(),"about:blank");

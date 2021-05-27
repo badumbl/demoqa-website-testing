@@ -39,6 +39,7 @@ public class TestPracticeForm extends HelperClass {
         subjects.add("Computer Science");
         subjects.add("English");
         subjects.add("Arts");
+        super.passMainPage();
     }
 
     @Test(priority = 1)
@@ -83,8 +84,7 @@ public class TestPracticeForm extends HelperClass {
     @Test(priority = 3)
     public void fillTheFormIncorrectly() {
         getDriver().findElement(By.xpath("//button[@id='submit']")).click();
-        //Thread.sleep(500);
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
+        Wait<WebDriver> wait = new FluentWait<>(getDriver())
                 .withTimeout(15, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);

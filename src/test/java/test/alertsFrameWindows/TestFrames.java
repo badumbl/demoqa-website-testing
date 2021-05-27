@@ -19,8 +19,7 @@ public class TestFrames extends HelperClass {
 
     @Test(priority = 1)
     public void goTo() {
-
-        fr.go();
+        fr.go().click();
     }
 
     @Test(priority = 2)

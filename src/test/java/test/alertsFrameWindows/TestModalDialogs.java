@@ -28,19 +28,19 @@ public class TestModalDialogs extends HelperClass {
 
     @Test(priority = 2)
     public void smallModal() {
-        md.small();
+        md.small().click();
         waitForVisible("//*[@class='modal-body']");
         Assert.assertEquals(getDriver().findElement(By.xpath("//*[@class='modal-body']")).getText(),
                 "This is a small modal. It has very less content");
-        md.close("small");
+        md.close("small").click();
     }
 
     @Test(priority = 3)
     public void largeModal() {
-        md.large();
+        md.large().click();
         waitForVisible("//*[@class='modal-body']//p");
         Assert.assertEquals(getDriver().findElement(By.xpath("//*[@class='modal-body']//p")).getText(), loremIpsum);
-        md.close("large");
+        md.close("large").click();
     }
 
     public void waitForVisible(String locator) {

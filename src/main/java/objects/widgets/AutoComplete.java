@@ -18,8 +18,8 @@ public class AutoComplete {
         this.actions = new Actions(driver);
     }
 
-    public void go() {
-        driver.findElement(By.xpath("//span[contains(text(),'Auto Complete')]")).click();
+    public WebElement go() {
+       return driver.findElement(By.xpath("//span[contains(text(),'Auto Complete')]"));
     }
 
     public List<WebElement> multiColor(String s) {

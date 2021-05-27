@@ -15,8 +15,8 @@ public class DatePicker {
         this.driver = driver;
     }
 
-    public void go() {
-        driver.findElement(By.xpath("//span[contains(text(),'Date Picker')]")).click();
+    public WebElement go() {
+       return driver.findElement(By.xpath("//span[contains(text(),'Date Picker')]"));
     }
 
     public void sDate(String day, String month, String year) {

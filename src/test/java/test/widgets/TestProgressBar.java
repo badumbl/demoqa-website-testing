@@ -23,7 +23,7 @@ public class TestProgressBar extends HelperClass {
     @BeforeClass
     public void init() {
         pb = new ProgressBar(getDriver());
-        wait = new FluentWait<WebDriver>(getDriver())
+        wait = new FluentWait<>(getDriver())
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
@@ -31,7 +31,7 @@ public class TestProgressBar extends HelperClass {
 
     @Test(priority = 1)
     public void goTo() {
-        pb.go();
+        pb.go().click();
     }
 
     @Test(priority = 2)

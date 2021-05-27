@@ -2,6 +2,7 @@ package objects.alertsFrameWindows;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class AlFrWi {
 
@@ -11,7 +12,7 @@ public class AlFrWi {
         this.driver = driver;
     }
 
-    public void go() {
-        driver.findElement(By.xpath("//div[contains(text(),'Alerts, Frame & Windows')]")).click();
+    public WebElement go() {
+       return driver.findElement(By.xpath("//div[contains(text(),'Alerts, Frame & Windows')]"));
     }
 }

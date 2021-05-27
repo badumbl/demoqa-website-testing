@@ -2,6 +2,7 @@ package objects.alertsFrameWindows;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class BrowserWindows {
 
@@ -11,19 +12,19 @@ public class BrowserWindows {
         this.driver = driver;
     }
 
-    public void go() {
-        driver.findElement(By.xpath("//span[contains(text(),'Browser Windows')]")).click();
+    public WebElement go() {
+       return driver.findElement(By.xpath("//span[contains(text(),'Browser Windows')]"));
     }
 
-    public void newTab() {
-        driver.findElement(By.xpath("//button[@id='tabButton']")).click();
+    public WebElement newTab() {
+        return driver.findElement(By.xpath("//button[@id='tabButton']"));
     }
 
-    public void newWindow() {
-        driver.findElement(By.xpath("//button[@id='windowButton']")).click();
+    public WebElement newWindow() {
+        return driver.findElement(By.xpath("//button[@id='windowButton']"));
     }
 
-    public void newWindowMessage() {
-        driver.findElement(By.xpath("//button[@id='messageWindowButton']")).click();
+    public WebElement newWindowMessage() {
+        return driver.findElement(By.xpath("//button[@id='messageWindowButton']"));
     }
 }

@@ -12,8 +12,8 @@ public class ProgressBar {
         this.driver = driver;
     }
 
-    public void go() {
-        driver.findElement(By.xpath("//span[contains(text(),'Progress Bar')]")).click();
+    public WebElement go() {
+        return driver.findElement(By.xpath("//span[contains(text(),'Progress Bar')]"));
     }
 
     public WebElement startStopButton() {

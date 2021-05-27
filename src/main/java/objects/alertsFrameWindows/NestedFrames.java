@@ -13,9 +13,7 @@ public class NestedFrames {
     }
 
     public WebElement goTo() {
-        WebElement elem = driver.findElement(By.xpath("//span[contains(text(),'Nested Frames')]"));
-        elem.click();
-        return elem;
+        return driver.findElement(By.xpath("//span[contains(text(),'Nested Frames')]"));
     }
 
     public void parentFrame() {

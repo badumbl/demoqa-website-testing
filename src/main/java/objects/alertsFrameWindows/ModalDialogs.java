@@ -16,19 +16,19 @@ public class ModalDialogs {
         return driver.findElement(By.xpath("//span[contains(text(),'Modal Dialogs')]"));
     }
 
-    public void small() {
-        driver.findElement(By.xpath("//button[@id='showSmallModal']")).click();
+    public WebElement small() {
+        return driver.findElement(By.xpath("//button[@id='showSmallModal']"));
     }
 
-    public void large() {
-        driver.findElement(By.xpath("//button[@id='showLargeModal']")).click();
+    public WebElement large() {
+        return driver.findElement(By.xpath("//button[@id='showLargeModal']"));
     }
 
-    public void close(String size) {
+    public WebElement close(String size) {
         if (size.equals("small")) {
-            driver.findElement(By.xpath("//button[@id='closeSmallModal']")).click();
+           return driver.findElement(By.xpath("//button[@id='closeSmallModal']"));
         } else {
-            driver.findElement(By.xpath("//button[@id='closeLargeModal']")).click();
+           return driver.findElement(By.xpath("//button[@id='closeLargeModal']"));
         }
     }
 }

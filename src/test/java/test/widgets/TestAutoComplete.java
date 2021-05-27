@@ -23,7 +23,7 @@ public class TestAutoComplete extends HelperClass {
 
     @Test(priority = 1)
     public void goTo() {
-        ac.go();
+        ac.go().click();
     }
 
     @Test(priority = 2)

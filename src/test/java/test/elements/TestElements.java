@@ -26,7 +26,7 @@ public class TestElements extends HelperClass {
     @Test
     public void goToElements() {
         elementsMenu.goToElementsMenu().click();
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
+        Wait<WebDriver> wait = new FluentWait<>(getDriver())
                 .withTimeout(15, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);

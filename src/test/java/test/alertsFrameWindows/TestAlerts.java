@@ -22,46 +22,54 @@ public class TestAlerts extends HelperClass {
 
     @Test(priority = 1)
     public void goToAlerts() {
-        al.goAlerts();
+        al.goAlerts().click();
     }
 
     @Test(priority = 2)
     public void alertButton() {
-        al.alert();
+        al.alert().click();
         Assert.assertEquals(getDriver().switchTo().alert().getText(), "You clicked a button");
-        al.acceptAlert();
+        acceptAlert();
     }
 
     @Test(priority = 2)
     public void alertFiveButton() {
-        al.alertFive();
+        al.alertFive().click();
         new WebDriverWait(getDriver(), 6)
                 .until(ExpectedConditions.alertIsPresent());
         Assert.assertEquals(getDriver().switchTo().alert().getText(), "This alert appeared after 5 seconds");
-        al.acceptAlert();
+        acceptAlert();
     }
 
     @Test(priority = 2)
     public void alertConfirmButton() {
-        al.alertConfirm();
+        al.alertConfirm().click();
         Assert.assertEquals(getDriver().switchTo().alert().getText(), "Do you confirm action?");
-        al.acceptAlert();
+        acceptAlert();
         Assert.assertEquals(getDriver().findElement(By.xpath("//span[@id='confirmResult']")).getText(), "You selected Ok");
-        al.alertConfirm();
+        al.alertConfirm().click();
         Assert.assertEquals(getDriver().switchTo().alert().getText(), "Do you confirm action?");
-        al.declineAlert();
+        declineAlert();
         Assert.assertEquals(getDriver().findElement(By.xpath("//span[@id='confirmResult']")).getText(), "You selected Cancel");
 
     }
 
     @Test(priority = 2)
     public void alertPromptButton() {
-        al.alertPrompt();
+        al.alertPrompt().click();
         Assert.assertEquals(getDriver().switchTo().alert().getText(), "Please enter your name");
         getDriver().switchTo().alert().sendKeys(text);
-        al.acceptAlert();
+        acceptAlert();
         Assert.assertEquals(getDriver().findElement(By.xpath("//span[@id='promptResult']")).getText(),
                 "You entered " + text);
+    }
+
+    public void acceptAlert() {
+        getDriver().switchTo().alert().accept();
+    }
+
+    public void declineAlert() {
+        getDriver().switchTo().alert().dismiss();
     }
 
 }
