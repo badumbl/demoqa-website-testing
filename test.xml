@@ -2,56 +2,62 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Practice Suite" verbose="1">
-    <test name="Test Main Page">
+     <test name="Test Main Page">
+         <classes>
+             <class name="test.TestMainPage"/>
+         </classes>
+     </test>
+     <test name="Test Elements">
+         <classes>
+             <class name="test.elements.TestElements"/>
+             <class name="test.elements.TestTextBox"/>
+             <class name="test.elements.TestCheckBox"/>
+             <class name="test.elements.TestRadioButton"/>
+             <class name="test.elements.TestWebTables"/>
+             <class name="test.elements.TestButtons"/>
+             <class name="test.elements.TestLinks"/>
+             <class name="test.elements.TestBrokenLinksImages"/>
+             <class name="test.elements.TestUploadAndDownload"/>
+             <class name="test.elements.TestDynamicProperties"/>
+         </classes>
+     </test>
+     <test name="Test Practise Form">
+         <classes>
+             <class name="test.forms.TestPracticeForm"/>
+         </classes>
+     </test>
+     <test name="Test Alerts, Frame and Windows">
+         <classes>
+             <class name="test.alertsFrameWindows.TestAlFrWi"/>
+             <class name="test.alertsFrameWindows.TestBrowserWindows"/>
+             <class name="test.alertsFrameWindows.TestAlerts"/>
+             <class name="test.alertsFrameWindows.TestFrames"/>
+             <class name="test.alertsFrameWindows.TestNestedFrames"/>
+             <class name="test.alertsFrameWindows.TestModalDialogs"/>
+         </classes>
+     </test>
+     <test name="Test Widgets">
+         <classes>
+             <class name="test.widgets.TestWidgets"/>
+             <class name="test.widgets.TestAccordian"/>
+             <class name="test.widgets.TestAutoComplete"/>
+             <class name="test.widgets.TestDatePicker"/>
+             <class name="test.widgets.TestSlider"/>
+             <class name="test.widgets.TestProgressBar"/>
+             <class name="test.widgets.TestTabs"/>
+             <class name="test.widgets.TestToolTips"/>
+             <class name="test.widgets.TestSelectMenus"/>
+         </classes>
+     </test>
+    <test name="Test Interactions">
         <classes>
-            <class name="test.TestMainPage"/>
+            <class name="test.interactions.TestInteractions"/>
+            <class name="test.interactions.TestSortable"/>
         </classes>
     </test>
-    <test name="Test Elements">
-        <classes>
-            <class name="test.elements.TestElements"/>
-            <class name="test.elements.TestTextBox"/>
-            <class name="test.elements.TestCheckBox"/>
-            <class name="test.elements.TestRadioButton"/>
-            <class name="test.elements.TestWebTables"/>
-            <class name="test.elements.TestButtons"/>
-            <class name="test.elements.TestLinks"/>
-            <class name="test.elements.TestBrokenLinksImages"/>
-            <class name="test.elements.TestUploadAndDownload"/>
-            <class name="test.elements.TestDynamicProperties"/>
-        </classes>
-    </test>
-    <test name="Test Practise Form">
-        <classes>
-            <class name="test.forms.TestPracticeForm"/>
-        </classes>
-    </test>
-    <test name="Test Alerts, Frame and Windows">
-        <classes>
-            <class name="test.alertsFrameWindows.TestAlFrWi"/>
-            <class name="test.alertsFrameWindows.TestBrowserWindows"/>
-            <class name="test.alertsFrameWindows.TestAlerts"/>
-            <class name="test.alertsFrameWindows.TestFrames"/>
-            <class name="test.alertsFrameWindows.TestNestedFrames"/>
-            <class name="test.alertsFrameWindows.TestModalDialogs"/>
-        </classes>
-    </test>
-    <test name="Widgets">
-        <classes>
-            <class name="test.widgets.TestWidgets"/>
-            <class name="test.widgets.TestAccordian"/>
-            <class name="test.widgets.TestAutoComplete"/>
-            <class name="test.widgets.TestDatePicker"/>
-            <class name="test.widgets.TestSlider"/>
-            <class name="test.widgets.TestProgressBar"/>
-            <class name="test.widgets.TestTabs"/>
-            <class name="test.widgets.TestToolTips"/>
-            <class name="test.widgets.TestSelectMenus"/>
-        </classes>
-    </test>
-      <test name="Test Book Store">
-          <classes>
-               <class name="test.bookStoreAppTest.TestBookStoreApp"/>
-          </classes>
-      </test>
+     <test name="Test Book Store">
+         <classes>
+              <class name="test.bookStoreAppTest.TestBookStoreApp"/>
+         </classes>
+     </test>
 </suite>
