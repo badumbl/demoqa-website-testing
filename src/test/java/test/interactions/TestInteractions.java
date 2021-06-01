@@ -22,13 +22,15 @@ public class TestInteractions extends HelperClass {
     @Test
     public void goTo(){
         inter.go().click();
-        new WebDriverWait(getDriver(), 10)
+       /* new WebDriverWait(getDriver(), 10)
                 .until(ExpectedConditions.attributeContains(getDriver().findElement(By
-                        .xpath("//div[contains(text(), 'Interactions')]/../../following-sibling::*")),"class","element-list collapse show"));
-        Assert.assertEquals(getDriver().findElement(By
+                        .xpath("//div[contains(text(), 'Interactions')]/../../following-sibling::*")),"class","element-list collapse show"));*/
+        new WebDriverWait(getDriver(), 10)
+                .until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//span[contains(text(),'Sortable')]"))));
+       /* Assert.assertEquals(getDriver().findElement(By
                         .xpath("//div[contains(text(), 'Interactions')]/../../following-sibling::*"))
                         .getAttribute("class"),
-                "element-list collapse show");
+                "element-list collapse show");*/
     }
 
 }

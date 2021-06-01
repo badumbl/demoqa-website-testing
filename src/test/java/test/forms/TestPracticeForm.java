@@ -44,7 +44,9 @@ public class TestPracticeForm extends HelperClass {
 
     @Test(priority = 1)
     public void goToForms() {
-        pf.goToForm();
+        pf.goToForm().click();
+        waiting(pf.goToPractice());
+        pf.goToPractice().click();
     }
 
     @Test(priority = 2)

@@ -55,9 +55,9 @@
             <class name="test.interactions.TestSortable"/>
         </classes>
     </test>
-     <test name="Test Book Store">
+     <!--<test name="Test Book Store">
          <classes>
               <class name="test.bookStoreAppTest.TestBookStoreApp"/>
          </classes>
-     </test>
+     </test>-->
 </suite>

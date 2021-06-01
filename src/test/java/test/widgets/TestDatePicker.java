@@ -46,7 +46,7 @@ public class TestDatePicker extends HelperClass {
 
 
     @Test(priority = 2)
-    public void selectDate() {
+    public void selectDate()  {
         convertDate();
         dp.sDate(day, month, year);
         Assert.assertEquals(getDriver().findElement(By.xpath("//input[@id='datePickerMonthYearInput']"))
@@ -54,11 +54,11 @@ public class TestDatePicker extends HelperClass {
     }
 
     @Test(priority = 3)
-    public void selectDateAndTime() {
+    public void selectDateAndTime()  {
         convertDateTime();
         dp.sDateTime(day, month, year, hoursAndMinutes);
         Assert.assertEquals(getDriver().findElement(By.xpath("//input[@id='dateAndTimePickerInput']"))
-                .getAttribute("value"), dateWithTime.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy h:mm a")));
+                .getAttribute("value"), dateWithTime.format(DateTimeFormatter.ofPattern("MMMM d, yyyy h:mm a")));
     }
 
     public void convertDate() {

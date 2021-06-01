@@ -3,6 +3,7 @@ package objects.forms;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -21,9 +22,13 @@ public class PracticeForm {
         act = new Actions(driver);
     }
 
-    public void goToForm() {
-        driver.findElement(By.xpath("//div[contains(text(),'Forms')]")).click();
-        driver.findElement(By.xpath("//span[contains(text(),'Practice Form')]")).click();
+    public WebElement goToForm() {
+        return driver.findElement(By.xpath("//div[contains(text(),'Forms')]"));
+
+    }
+
+    public WebElement goToPractice() {
+        return driver.findElement(By.xpath("//span[contains(text(),'Practice Form')]"));
     }
 
 
@@ -46,7 +51,7 @@ public class PracticeForm {
                 .click();
         for (String subject : subjects) {
             act.sendKeys(subject).build().perform();
-            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+            Wait<WebDriver> wait = new FluentWait<>(driver)
                     .withTimeout(10, TimeUnit.SECONDS)
                     .pollingEvery(1, TimeUnit.MILLISECONDS)
                     .ignoring(NoSuchElementException.class);

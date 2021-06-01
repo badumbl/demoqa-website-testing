@@ -20,6 +20,7 @@ public class TestBrowserWindows extends HelperClass {
     @Test(priority = 1)
     public void goTo() {
         bw.go().click();
+        waiting(bw.newTab());
     }
 
     @Test(priority = 2)
