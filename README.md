@@ -1,6 +1,6 @@
 # demoqa-website-testing
 
-Testing of the https://demoqa.com/ website using Selenium, TestNG and Java
+Selenium, TestNG and Java practice by testing of the https://demoqa.com/ website
 
 Each menu element of the site is tested as a separate page object.
 
