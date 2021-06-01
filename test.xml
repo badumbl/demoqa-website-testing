@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Practice Suite" verbose="1">
-     <test name="Test Main Page">
+ <!--    <test name="Test Main Page">
          <classes>
              <class name="test.TestMainPage"/>
          </classes>
@@ -48,16 +48,16 @@
              <class name="test.widgets.TestToolTips"/>
              <class name="test.widgets.TestSelectMenus"/>
          </classes>
-     </test>
+     </test>-->
     <test name="Test Interactions">
         <classes>
             <class name="test.interactions.TestInteractions"/>
             <class name="test.interactions.TestSortable"/>
         </classes>
     </test>
-     <test name="Test Book Store">
+    <!-- <test name="Test Book Store">
          <classes>
               <class name="test.bookStoreAppTest.TestBookStoreApp"/>
          </classes>
-     </test>
+     </test>-->
 </suite>

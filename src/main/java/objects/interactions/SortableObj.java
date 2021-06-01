@@ -25,7 +25,6 @@ public class SortableObj {
     }
 
     public WebElement getFromList(String name) {
-        list = driver.findElements(By.xpath("//div[@id='demo-tabpane-list']//div[@class='vertical-list-container mt-4']//child::*"));
         for (WebElement elem : list) {
             if (elem.getText().contains(name)) {
                 return elem;
@@ -34,18 +33,28 @@ public class SortableObj {
         return null;
     }
 
+
     public WebElement goToGrid() {
         return driver.findElement(By.xpath("//a[@id='demo-tab-grid']"));
     }
 
     public WebElement getFromGrid(String name) {
-        grid = driver.findElements(By.xpath("//div[@id='demo-tabpane-grid']//div[@class='create-grid']//child::*"));
         for (WebElement elem : grid) {
             if (elem.getText().contains(name)) {
                 return elem;
             }
         }
         return null;
+    }
+
+    public List<WebElement> fillTheList() {
+        list = driver.findElements(By.xpath("//div[@id='demo-tabpane-list']//div[@class='vertical-list-container mt-4']//child::*"));
+        return list;
+    }
+
+    public List<WebElement> fillTheGrid() {
+        grid = driver.findElements(By.xpath("//div[@id='demo-tabpane-grid']//div[@class='create-grid']//child::*"));
+        return grid;
     }
 
 }
