@@ -53,6 +53,7 @@
         <classes>
             <class name="test.interactions.TestInteractions"/>
             <class name="test.interactions.TestSortable"/>
+            <class name="test.interactions.TestSelectable"/>
         </classes>
     </test>
      <!--<test name="Test Book Store">
