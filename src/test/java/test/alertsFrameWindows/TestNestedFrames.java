@@ -18,6 +18,7 @@ public class TestNestedFrames extends HelperClass {
 
     @Test(priority = 1)
     public void goToNestedFrames() {
+        super.waiting(getDriver().findElement(By.xpath("//iframe[@id='frame1']")));
         nf.goTo().click();
     }
 

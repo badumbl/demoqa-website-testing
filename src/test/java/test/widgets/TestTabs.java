@@ -1,6 +1,7 @@
 package test.widgets;
 
 import objects.widgets.Tabs;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,6 +18,9 @@ public class TestTabs extends HelperClass {
 
     @Test(priority = 1)
     public void goTo() {
+        //Scroll is needed, because footer blocks button on smaller monitors
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("window.scrollBy(0,250)");
         tb.go().click();
     }
 

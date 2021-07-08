@@ -55,11 +55,12 @@
             <class name="test.interactions.TestSortable"/>
             <class name="test.interactions.TestSelectable"/>
             <class name="test.interactions.TestResizable"/>
+            <class name="test.interactions.TestDroppable"/>
         </classes>
     </test>
-     <!--<test name="Test Book Store">
+     <test name="Test Book Store">
          <classes>
               <class name="test.bookStoreAppTest.TestBookStoreApp"/>
          </classes>
-     </test>-->
+     </test>
 </suite>

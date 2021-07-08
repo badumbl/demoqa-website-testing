@@ -2,6 +2,7 @@ package test.forms;
 
 import objects.forms.PracticeForm;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -40,6 +41,7 @@ public class TestPracticeForm extends HelperClass {
         subjects.add("English");
         subjects.add("Arts");
         super.passMainPage();
+
     }
 
     @Test(priority = 1)
@@ -47,10 +49,11 @@ public class TestPracticeForm extends HelperClass {
         pf.goToForm().click();
         waiting(pf.goToPractice());
         pf.goToPractice().click();
+
     }
 
     @Test(priority = 2)
-    public void fillTheForm() {
+    public void fillTheForm() throws InterruptedException {
         pf.fillForm(fName, lName, email, gender, mobile, dayBirth, monthBirth, yearBirth, subjects,
                 hobbies, address, state, city);
         Assert.assertEquals(getDriver()

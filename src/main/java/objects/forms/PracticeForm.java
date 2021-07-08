@@ -1,9 +1,6 @@
 package objects.forms;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -34,7 +31,7 @@ public class PracticeForm {
 
     public void fillForm(String fName, String lName, String email, String gender, String mobile,
                          String dayBirth, String monthBirth, int yearBirth, ArrayList<String> subjects,
-                         String hobbies, String address, String state, String city) {
+                         String hobbies, String address, String state, String city) throws InterruptedException {
 
         driver.findElement(By.xpath("//input[@id='firstName']")).sendKeys(fName);
         driver.findElement(By.xpath("//input[@id='lastName']")).sendKeys(lName);
@@ -58,6 +55,8 @@ public class PracticeForm {
             wait.until((WebDriver) -> driver.findElement(By.xpath(visible)).isDisplayed());
             driver.findElement(By.xpath(visible)).click();
         }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,250)");
         driver.findElement(By.xpath("//label[contains(text(),'" + hobbies + "')]")).click();
         driver.findElement(By.xpath("//textarea[@id='currentAddress']")).sendKeys(address);
         driver.findElement(By.xpath("//div[contains(text(),'Select State')]")).click();

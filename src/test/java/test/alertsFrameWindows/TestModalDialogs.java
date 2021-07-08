@@ -22,7 +22,6 @@ public class TestModalDialogs extends HelperClass {
 
     @Test(priority = 1)
     public void goTo() {
-        waiting(md.go());
         md.go().click();
     }
 
