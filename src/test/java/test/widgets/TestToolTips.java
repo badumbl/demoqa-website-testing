@@ -11,12 +11,12 @@ import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestToolTips extends HelperClass {
-
+public class TestToolTips extends BaseTest {
+/*
     private ToolTips tt;
     private Actions act;
     private Wait<WebDriver> wait;
@@ -24,13 +24,13 @@ public class TestToolTips extends HelperClass {
 
     @BeforeClass
     public void init() {
-        tt = new ToolTips(getDriver());
-        act = new Actions(getDriver());
-        wait = new FluentWait<WebDriver>(getDriver())
+        tt = new ToolTips(driver);
+        act = new Actions(driver);
+        wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
-        jse = (JavascriptExecutor) getDriver();
+        jse = (JavascriptExecutor) driver;
     }
 
     @Test(priority = 1)
@@ -66,6 +66,6 @@ public class TestToolTips extends HelperClass {
         wait.until((WebDriver wd) -> tt.hoverLinkTwoText().isDisplayed());
         Assert.assertEquals(tt.hoverLinkTwoText().getText(), "You hovered over the 1.10.32");
 
-    }
+    }*/
 
 }

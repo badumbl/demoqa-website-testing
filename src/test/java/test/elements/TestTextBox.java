@@ -1,41 +1,44 @@
 package test.elements;
 
+import objects.elements.ElementsMenu;
 import objects.elements.TextBox;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestTextBox extends HelperClass {
+public class TestTextBox extends BaseTest {
 
-    private TextBox tb;
-    private String fullName = "fullname";
-    private String email = "email@dot.com";
-    private String address = "adress";
-    private String permAddress = "permAdress";
+    private TextBox textBoxPage;
+    private ElementsMenu em;
+    private static final String FULL_NAME = "full name";
+    private static final String EMAIL = "email@dot.com";
+    private static final String ADDRESS = "address";
+    private static final String PERM_ADDRESS = "permanent address";
+    private static final String FULL_NAME_TEXT = "Name:" + FULL_NAME;
+    private static final String EMAIL_TEXT = "Email:" + EMAIL;
+    private static final String ADDRESS_TEXT = "Current Address :" + ADDRESS;
+    private static final String PERM_ADDRESS_TEXT = "Permananet Address :" + PERM_ADDRESS;
+
 
     @BeforeClass
     public void init() {
-        tb = new TextBox(getDriver());
+        textBoxPage = new TextBox(driver);
+        em = new ElementsMenu(driver);
+        super.passMainPage();
     }
 
     @Test
     public void fillFormAndSubmit() {
-        tb.goToTextBox().click();
-        this.fillNsubmit();
-        Assert.assertEquals("Name:" + fullName, getDriver().findElement(By.xpath("//p[@id='name']")).getText());
-        Assert.assertEquals("Email:" + email, getDriver().findElement(By.xpath("//p[@id='email']")).getText());
-        Assert.assertEquals("Current Address :" + address, getDriver().findElement(By.xpath("//p[@id='currentAddress']")).getText());
-        Assert.assertEquals("Permananet Address :" + permAddress, getDriver().findElement(By.xpath("//p[@id='permanentAddress']")).getText());
+        em.goToElementsMenu();
+        textBoxPage
+                .goToTextBox()
+                .submitForm(FULL_NAME, EMAIL, ADDRESS, PERM_ADDRESS);
+        Assert.assertEquals(FULL_NAME_TEXT, textBoxPage.getNameTextOutput().getText());
+        Assert.assertEquals(EMAIL_TEXT, textBoxPage.getEmailTextOutput().getText());
+        Assert.assertEquals(ADDRESS_TEXT, textBoxPage.getAddressTextOutput().getText());
+        Assert.assertEquals(PERM_ADDRESS_TEXT, textBoxPage.getPermAddressTextOutput().getText());
     }
 
-    public void fillNsubmit(){
-        tb.name().sendKeys(fullName);
-        tb.email().sendKeys(email);
-        tb.address().sendKeys(address);
-        tb.permAddress().sendKeys(permAddress);
-        tb.submitButton().click();
-    }
 
 }

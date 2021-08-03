@@ -1,64 +1,62 @@
 package test.widgets;
 
 import objects.widgets.DatePicker;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
+import objects.widgets.Widgets;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.TimeUnit;
 
-public class TestDatePicker extends HelperClass {
+public class TestDatePicker extends BaseTest {
 
-    private DatePicker dp;
+    private DatePicker datePickerPage;
+    private Widgets wd;
     private String day;
     private String month;
     private String year;
     private String hoursAndMinutes;
-    private LocalDate todaysDate = LocalDate.now();
+    private final LocalDate todaysDate = LocalDate.now();
     private LocalDateTime dateWithTime = LocalDateTime.now();
-    private Wait<WebDriver> wait;
 
 
     @BeforeClass
     public void init() {
-        this.dp = new DatePicker(getDriver());
-        wait = new FluentWait<>(getDriver())
-                .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(1, TimeUnit.MILLISECONDS)
-                .ignoring(NoSuchElementException.class);
+        this.datePickerPage = new DatePicker(driver);
+        wd = new Widgets(driver);
+        super.passMainPage();
+        convertDate();
+        convertDateTime();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        wait.until((WebDriver wb) -> getDriver().findElement(By.xpath("//span[contains(text(),'Date Picker')]")).isDisplayed());
-        dp.go().click();
-        wait.until((WebDriver wb) -> getDriver().findElement(By.xpath("//input[@id='datePickerMonthYearInput']")).isDisplayed());
+        wd.go();
+        datePickerPage.go();
     }
 
 
     @Test(priority = 2)
-    public void selectDate()  {
-        convertDate();
-        dp.sDate(day, month, year);
-        Assert.assertEquals(getDriver().findElement(By.xpath("//input[@id='datePickerMonthYearInput']"))
-                .getAttribute("value"), todaysDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+    public void selectDate() {
+        Assert.assertEquals(
+                datePickerPage
+                        .sDate(day, month, year)
+                        .getDayMonthYear().getAttribute("value"),
+                todaysDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
+        );
     }
 
     @Test(priority = 3)
-    public void selectDateAndTime()  {
-        convertDateTime();
-        dp.sDateTime(day, month, year, hoursAndMinutes);
-        Assert.assertEquals(getDriver().findElement(By.xpath("//input[@id='dateAndTimePickerInput']"))
-                .getAttribute("value"), dateWithTime.format(DateTimeFormatter.ofPattern("MMMM d, yyyy h:mm a")));
+    public void selectDateAndTime() {
+        Assert.assertEquals(
+                datePickerPage
+                        .sDateTime(day, month, year, hoursAndMinutes)
+                        .getDateAndTime().getAttribute("value"),
+                dateWithTime.format(DateTimeFormatter.ofPattern("MMMM d, yyyy h:mm a"))
+        );
     }
 
     public void convertDate() {
@@ -66,7 +64,6 @@ public class TestDatePicker extends HelperClass {
         day = dateArray[0];
         month = dateArray[1];
         year = dateArray[2];
-
     }
 
     public void convertDateTime() {

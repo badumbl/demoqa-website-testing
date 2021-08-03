@@ -1,48 +1,61 @@
 package test.interactions;
 
+import objects.interactions.Interactions;
 import objects.interactions.Resizable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestResizable extends HelperClass {
+public class TestResizable extends BaseTest {
 
-    private Resizable res;
-    private Actions action;
+    private Resizable resizablePage;
+    private Interactions inter;
+    private final static String FIXED_MAX ="width: 500px; height: 300px;";
+    private final static String FIXED_MIN ="width: 150px; height: 150px;";
 
     @BeforeClass
     public void init() {
-        res = new Resizable(getDriver());
-        action = new Actions(getDriver());
+        resizablePage = new Resizable(driver);
+        inter = new Interactions(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        res.go().click();
+        inter.go();
+        resizablePage.go();
     }
 
     @Test(priority = 2)
     public void resizeBoxInside() {
-        action.dragAndDropBy(res.resizeInside(), 350, 150).perform();
-        Assert.assertEquals(getDriver()
-                .findElement(By.xpath("//div[@id='resizableBoxWithRestriction']"))
-                .getAttribute("style"), "width: 500px; height: 300px;");
-        action.dragAndDropBy(res.resizeInside(), -400, -400).perform();
-        Assert.assertEquals(getDriver()
-                .findElement(By.xpath("//div[@id='resizableBoxWithRestriction']"))
-                .getAttribute("style"), "width: 150px; height: 150px;");
+        Assert.assertEquals(
+                resizablePage
+                        .dragAndDropOffset(resizablePage.getResizeInside(), 350, 150)
+                        .getResizableRestrictions()
+                        .getAttribute("style"),
+                FIXED_MAX
+        );
+        Assert.assertEquals(
+                resizablePage
+                        .dragAndDropOffset(resizablePage.getResizeInside(), -400, -400)
+                        .getResizableRestrictions()
+                        .getAttribute("style"),
+                FIXED_MIN
+        );
     }
 
     @Test(priority = 2)
     public void resizeBoxOutside() {
-        String before = getDriver().findElement(By.xpath("//div[@id='resizable']")).getAttribute("style");
-        action.dragAndDropBy(res.resizeOutside(), 350, 150).perform();
-        Assert.assertNotEquals(getDriver()
-                .findElement(By.xpath("//div[@id='resizable']"))
-                .getAttribute("style"), before);
+        String originalValue = resizablePage.getResizable().getAttribute("style");
+
+        Assert.assertNotEquals(
+                resizablePage
+                        .dragAndDropOffset(resizablePage.getResizeOutside(), 350, 150)
+                        .getResizable()
+                        .getAttribute("style"),
+                originalValue
+        );
     }
 
 }

@@ -1,26 +1,33 @@
 package test.elements;
 
 import objects.elements.CheckBox;
-import org.openqa.selenium.By;
+import objects.elements.ElementsMenu;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestCheckBox extends HelperClass {
+public class TestCheckBox extends BaseTest {
 
-    private CheckBox cb;
+    private CheckBox checkBoxPage;
+    private ElementsMenu em;
+    private final static String result = "react";
 
     @BeforeClass
     public void init() {
-        cb = new CheckBox(getDriver());
+        checkBoxPage = new CheckBox(driver);
+        em = new ElementsMenu(driver);
+        super.passMainPage();
+        em.goToElementsMenu();
     }
 
     @Test
     public void checkReactBox() {
-        cb.goToCheckBox().click();
-        cb.checkReact();
-        Assert.assertEquals("react",
-                getDriver().findElement(By.xpath("//span[@class='text-success']")).getText());
+        Assert.assertTrue(
+                checkBoxPage
+                        .goToCheckBox()
+                        .checkReact()
+                        .isChoiceCorrect(result)
+        );
     }
 }

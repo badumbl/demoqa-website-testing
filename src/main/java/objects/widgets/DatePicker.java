@@ -1,27 +1,39 @@
 package objects.widgets;
 
+import lombok.Data;
+import objects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class DatePicker {
+@Data
+public class DatePicker extends BasePage {
 
-    private WebDriver driver;
 
+    @FindBy(xpath = "//span[contains(text(),'Date Picker')]")
+    private WebElement datePicker;
+    @FindBy(xpath = "//input[@id='datePickerMonthYearInput']")
+    private WebElement dayMonthYear;
+    @FindBy(xpath = "//input[@id='dateAndTimePickerInput']")
+    private WebElement dateAndTime;
 
     public DatePicker(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Date Picker')]"));
+    public DatePicker go() {
+        datePicker.click();
+        waitVisibility(dayMonthYear);
+        return this;
     }
 
-    public void sDate(String day, String month, String year) {
-        driver.findElement(By.xpath("//input[@id='datePickerMonthYearInput']")).click();
+    public DatePicker sDate(String day, String month, String year) {
+        dayMonthYear.click();
         driver.findElement(By.xpath("//option[@value='" + year + "']")).click();
         driver.findElement(By.xpath("//option[contains(text(),'" + month + "')]")).click();
         try {
@@ -29,12 +41,11 @@ public class DatePicker {
         } catch (NullPointerException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
-
+        return this;
     }
 
-
-    public void sDateTime(String day, String month, String year, String hoursAndMinutes) {
-        driver.findElement(By.xpath("//input[@id='dateAndTimePickerInput']")).click();
+    public DatePicker sDateTime(String day, String month, String year, String hoursAndMinutes) {
+        dateAndTime.click();
         driver.findElement(By.xpath("//span[@class='react-datepicker__year-read-view--selected-year']")).click();
         driver.findElement(By.xpath("//div[@class='react-datepicker__year-dropdown']//*[contains(text(),'" + year + "')]")).click();
         driver.findElement(By.xpath("//span[@class='react-datepicker__month-read-view--selected-month']")).click();
@@ -45,6 +56,7 @@ public class DatePicker {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
         driver.findElement(By.xpath("//li[text()='" + hoursAndMinutes + "']")).click();
+        return this;
     }
 
     private WebElement pickDayInsideTheMonth(String day) {

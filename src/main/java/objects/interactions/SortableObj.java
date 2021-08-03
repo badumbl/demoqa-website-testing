@@ -1,31 +1,47 @@
 package objects.interactions;
 
-import org.openqa.selenium.By;
+import lombok.Data;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class SortableObj {
+@Data
+public class SortableObj extends BasePage {
 
-    private WebDriver driver;
-    private List<WebElement> list;
-    private List<WebElement> grid;
+
+    @FindBy(xpath = "//span[contains(text(),'Sortable')]")
+    private WebElement sortablePage;
+    @FindBy(xpath = "//a[@id='demo-tab-list']")
+    private WebElement listPage;
+    @FindBy(xpath = "//a[@id='demo-tab-grid']")
+    private WebElement gridPage;
+    @FindBy(xpath = "//div[@id='demo-tabpane-list']//div[@class='vertical-list-container mt-4']//child::*")
+    private List<WebElement> listElements;
+    @FindBy(xpath = "//div[@id='demo-tabpane-grid']//div[@class='create-grid']//child::*")
+    private List<WebElement> gridElements;
 
     public SortableObj(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Sortable')]"));
+    public SortableObj go() {
+        sortablePage.click();
+        return this;
     }
 
-    public WebElement goToList() {
-        return driver.findElement(By.xpath("//a[@id='demo-tab-list']"));
+    public SortableObj goToList() {
+        listPage.click();
+        waitVisibility(listElements.get(0));
+        return this;
     }
 
     public WebElement getFromList(String name) {
-        for (WebElement elem : list) {
+        for (WebElement elem : listElements) {
             if (elem.getText().contains(name)) {
                 return elem;
             }
@@ -33,13 +49,14 @@ public class SortableObj {
         return null;
     }
 
-
-    public WebElement goToGrid() {
-        return driver.findElement(By.xpath("//a[@id='demo-tab-grid']"));
+    public SortableObj goToGrid() {
+        gridPage.click();
+        waitVisibility(gridElements.get(0));
+        return this;
     }
 
     public WebElement getFromGrid(String name) {
-        for (WebElement elem : grid) {
+        for (WebElement elem : gridElements) {
             if (elem.getText().contains(name)) {
                 return elem;
             }
@@ -47,14 +64,13 @@ public class SortableObj {
         return null;
     }
 
-    public List<WebElement> fillTheList() {
-        list = driver.findElements(By.xpath("//div[@id='demo-tabpane-list']//div[@class='vertical-list-container mt-4']//child::*"));
-        return list;
-    }
-
-    public List<WebElement> fillTheGrid() {
-        grid = driver.findElements(By.xpath("//div[@id='demo-tabpane-grid']//div[@class='create-grid']//child::*"));
-        return grid;
+    public void dragAndDrop(WebElement source, WebElement target) {
+        try {
+            action.moveToElement(source);
+            action.dragAndDrop(source, target).perform();
+        } catch (NullPointerException nul) {
+            System.out.println(Arrays.toString(nul.getStackTrace()));
+        }
     }
 
 }

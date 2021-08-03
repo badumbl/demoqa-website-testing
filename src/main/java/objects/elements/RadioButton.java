@@ -1,30 +1,49 @@
 package objects.elements;
 
-import org.openqa.selenium.By;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class RadioButton {
+public class RadioButton extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//span[contains(text(),'Radio Button')]")
+    private WebElement radioButtonPage;
+    @FindBy(xpath = "//label[contains(text(),'Yes')]")
+    private WebElement yesButton;
+    @FindBy(xpath = "//label[contains(text(),'Impressive')]")
+    private WebElement impressiveButton;
+    @FindBy(xpath = "//label[contains(text(),'No')]")
+    private WebElement noButton;
+    @FindBy(xpath = "//span[@class='text-success']")
+    private WebElement successText;
 
     public RadioButton(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement goToRadio() {
-       return driver.findElement(By.xpath("//span[contains(text(),'Radio Button')]"));
+    public RadioButton goToRadio() {
+        radioButtonPage.click();
+        return this;
     }
 
-    public WebElement checkYes() {
-        return driver.findElement(By.xpath("//label[contains(text(),'Yes')]"));
+    public RadioButton checkYes() {
+        yesButton.click();
+        return this;
     }
 
-    public WebElement checkImpr() {
-        return driver.findElement(By.xpath("//label[contains(text(),'Impressive')]"));
+    public RadioButton checkImpr() {
+        impressiveButton.click();
+        return this;
     }
 
-    public WebElement checkNo() {
-        return  driver.findElement(By.xpath("//label[contains(text(),'No')]"));
+    public RadioButton checkNo() {
+        noButton.click();
+        return this;
+    }
+
+    public boolean isTextEquals(String text){
+        return successText.getText().equals(text);
     }
 }

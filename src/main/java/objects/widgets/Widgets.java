@@ -1,18 +1,24 @@
 package objects.widgets;
 
-import org.openqa.selenium.By;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Widgets {
+public class Widgets extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//div[contains(text(), 'Widgets')]")
+    private WebElement widgetsPage;
+    @FindBy(xpath = "//span[contains(text(),'Select Menu')]")
+    private WebElement selectMenuPage;
 
     public Widgets(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//div[contains(text(), 'Widgets')]"));
+    public Widgets go() {
+        widgetsPage.click();
+        waitVisibility(selectMenuPage);
+        return this;
     }
 }

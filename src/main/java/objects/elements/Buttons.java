@@ -1,31 +1,63 @@
 package objects.elements;
 
-import org.openqa.selenium.By;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Buttons {
+public class Buttons extends BasePage {
 
-    private WebDriver driver;
-
+    @FindBy(xpath = "//span[contains(text(),'Buttons')]")
+    private WebElement buttonsPage;
+    @FindBy(xpath = "//button[@id='doubleClickBtn']")
+    private WebElement doubleClickButton;
+    @FindBy(xpath = "//button[@id='rightClickBtn']")
+    private WebElement rightClickButton;
+    @FindBy(xpath = "//button[text()='Click Me']")
+    private WebElement singleClickButton;
+    @FindBy(xpath = "//p[@id='doubleClickMessage']")
+    private WebElement doubleClickButtonMessage;
+    @FindBy(xpath = "//p[@id='rightClickMessage']")
+    private WebElement rightClickButtonMessage;
+    @FindBy(xpath = "//p[@id='dynamicClickMessage']")
+    private WebElement singleClickButtonMessage;
 
     public Buttons(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement goButton() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Buttons')]"));
+    public Buttons goButton() {
+        buttonsPage.click();
+        waitVisibility(doubleClickButton);
+        return this;
     }
 
-    public WebElement doubleClick() {
-        return driver.findElement(By.xpath("//button[@id='doubleClickBtn']"));
+    public Buttons doubleClick() {
+        action.doubleClick(doubleClickButton).perform();
+        return this;
     }
 
-    public WebElement rightClick() {
-        return driver.findElement(By.xpath("//button[@id='rightClickBtn']"));
+    public Buttons rightClick() {
+        action.contextClick(rightClickButton).perform();
+        return this;
     }
 
-    public WebElement singleClick() {
-        return driver.findElement(By.xpath("//button[text()='Click Me']"));
+    public Buttons singleClick() {
+        singleClickButton.click();
+        return this;
     }
+
+    public String getDoubleClickText() {
+        return doubleClickButtonMessage.getText();
+    }
+
+    public String getRightClickText() {
+        return rightClickButtonMessage.getText();
+    }
+
+    public String getSingleClickText() {
+        return singleClickButtonMessage.getText();
+    }
+
 }

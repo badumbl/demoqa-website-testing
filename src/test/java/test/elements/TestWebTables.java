@@ -1,59 +1,69 @@
 package test.elements;
 
+import objects.elements.ElementsMenu;
 import objects.elements.WebTables;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestWebTables extends HelperClass {
+public class TestWebTables extends BaseTest {
 
-    private WebTables wb;
-    private String firstName = "First";
-    private String lastName = "Last";
-    private String email = "email@email.com";
-    private String age = "21";
-    private String salary = "5000";
-    private String department = "dept";
-    private String editedDepartment = "department";
+    private WebTables webTablesPage;
+    private ElementsMenu em;
+    private final static String FIRST_NAME = "First";
+    private final static String LAST_NAME = "Last";
+    private final static String EMAIL = "email@email.com";
+    private final static String AGE = "21";
+    private final static String SALARY = "5000";
+    private final static String DEPARTMENT = "dept";
+    private final static String EDITED_DEPARTMENT = "department";
 
     @BeforeClass
-    public void init(){
-        wb = new WebTables(getDriver());
+    public void init() {
+        webTablesPage = new WebTables(driver);
+        em = new ElementsMenu(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goToWebTables() {
-        wb.goToTables().click();
+        em.goToElementsMenu();
+        webTablesPage.goToTables();
     }
 
     @Test(priority = 2)
-    public void addAndRegister() {
-        wb.addButton().click();
-        wb.register(firstName, lastName, email, age, salary, department);
-        wb.submitBtn().click();
-        Assert.assertEquals(firstName, getDriver().findElement(By.xpath("//div[text()='" + firstName + "']")).getText());
+    public void addNewPerson() {
+        Assert.assertNotNull(
+                webTablesPage
+                        .register(FIRST_NAME, LAST_NAME, EMAIL, AGE, SALARY, DEPARTMENT)
+                        .findByValue(FIRST_NAME)
+        );
     }
 
     @Test(priority = 3)
     public void editDepartment() {
-        wb.editBtn(department).click();
-        wb.editDept(editedDepartment);
-        wb.submitBtn().click();
-        Assert.assertEquals(editedDepartment, getDriver().findElement(By.xpath("//div[text()='" + editedDepartment + "']")).getText());
-
+        Assert.assertNotNull(
+                webTablesPage
+                        .editDept(DEPARTMENT, EDITED_DEPARTMENT)
+                        .findByValue(EDITED_DEPARTMENT)
+        );
     }
 
     @Test(priority = 4)
     public void search() {
-        wb.search().sendKeys(lastName);
-        Assert.assertEquals(lastName, getDriver().findElement(By.xpath("//div[text()='" + lastName + "']")).getText());
+        Assert.assertNotNull(
+                webTablesPage
+                        .search(LAST_NAME)
+                        .findByValue(LAST_NAME)
+        );
     }
 
     @Test(priority = 5)
     public void deleteRow() {
-        wb.delete(firstName).click();
-        Assert.assertTrue(getDriver().findElements(By.xpath("//div[text()='" + firstName + "']")).isEmpty());
+        Assert.assertNull(webTablesPage
+                .delete(FIRST_NAME)
+                .findByValue(FIRST_NAME)
+        );
     }
 }

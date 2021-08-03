@@ -1,5 +1,6 @@
 package objects.widgets;
 
+import objects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectMenus {
+public class SelectMenus extends BasePage {
 
     private WebDriver driver;
     private List<WebElement> list;

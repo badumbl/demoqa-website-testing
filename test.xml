@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Practice Suite" verbose="1">
-     <test name="Test Main Page">
+<suite name="Practice Suite" verbose="1" parallel="classes" thread-count="5">
+    <!-- <test name="Test Main Page">
          <classes>
              <class name="test.TestMainPage"/>
          </classes>
-     </test>
+     </test>-->
      <test name="Test Elements">
          <classes>
-             <class name="test.elements.TestElements"/>
              <class name="test.elements.TestTextBox"/>
              <class name="test.elements.TestCheckBox"/>
              <class name="test.elements.TestRadioButton"/>
@@ -28,7 +27,6 @@
      </test>
      <test name="Test Alerts, Frame and Windows">
          <classes>
-             <class name="test.alertsFrameWindows.TestAlFrWi"/>
              <class name="test.alertsFrameWindows.TestBrowserWindows"/>
              <class name="test.alertsFrameWindows.TestAlerts"/>
              <class name="test.alertsFrameWindows.TestFrames"/>
@@ -38,20 +36,18 @@
      </test>
      <test name="Test Widgets">
          <classes>
-             <class name="test.widgets.TestWidgets"/>
              <class name="test.widgets.TestAccordian"/>
              <class name="test.widgets.TestAutoComplete"/>
              <class name="test.widgets.TestDatePicker"/>
              <class name="test.widgets.TestSlider"/>
              <class name="test.widgets.TestProgressBar"/>
-             <class name="test.widgets.TestTabs"/>
+            <!-- <class name="test.widgets.TestTabs"/>
              <class name="test.widgets.TestToolTips"/>
-             <class name="test.widgets.TestSelectMenus"/>
+             <class name="test.widgets.TestSelectMenus"/>-->
          </classes>
      </test>
     <test name="Test Interactions">
         <classes>
-            <class name="test.interactions.TestInteractions"/>
             <class name="test.interactions.TestSortable"/>
             <class name="test.interactions.TestSelectable"/>
             <class name="test.interactions.TestResizable"/>

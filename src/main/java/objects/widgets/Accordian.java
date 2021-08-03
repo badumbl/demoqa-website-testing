@@ -1,30 +1,55 @@
 package objects.widgets;
 
-import org.openqa.selenium.By;
+import lombok.Data;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Accordian {
+@Data
+public class Accordian extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//span[contains(text(),'Accordian')]")
+    private WebElement accordianPage;
+    @FindBy(xpath = "//div[@id='section1Heading']")
+    private WebElement whatIsSection;
+    @FindBy(xpath = "//div[@id='section1Heading']/following-sibling::div")
+    private WebElement whatIsContent;
+    @FindBy(xpath = "//div[@id='section2Heading']")
+    private WebElement whereDoesSection;
+    @FindBy(xpath = "//div[@id='section2Heading']/following-sibling::div")
+    private WebElement whereDoesContent;
+    @FindBy(xpath = "//div[@id='section3Heading']")
+    private WebElement whyDoSection;
+    @FindBy(xpath = "//div[@id='section3Heading']/following-sibling::div")
+    private WebElement whyDoContent;
+    private final static String CLASS_VALUE = "collapse show";
 
     public Accordian(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Accordian')]"));
+    public Accordian go() {
+        accordianPage.click();
+        return this;
     }
 
-    public WebElement whatIs() {
-        return driver.findElement(By.xpath("//div[@id='section1Heading']"));
+    public Accordian whatIs() {
+        whatIsSection.click();
+        waitingClassValue(whatIsContent,CLASS_VALUE);
+        return this;
     }
 
-    public WebElement whereDoes() {
-        return driver.findElement(By.xpath("//div[@id='section2Heading']"));
+    public Accordian whereDoes() {
+        whereDoesSection.click();
+        waitingClassValue(whereDoesContent,CLASS_VALUE);
+        return this;
     }
 
-    public WebElement whyDo() {
-        return driver.findElement(By.xpath("//div[@id='section3Heading']"));
+    public Accordian whyDo() {
+        whyDoSection.click();
+        waitingClassValue(whyDoContent,CLASS_VALUE);
+        return this;
     }
 }

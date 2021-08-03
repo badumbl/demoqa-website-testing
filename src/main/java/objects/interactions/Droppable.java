@@ -1,95 +1,97 @@
 package objects.interactions;
 
-import org.openqa.selenium.By;
+import lombok.Data;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Droppable {
+@Data
+public class Droppable extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//span[contains(text(),'Droppable')]")
+    private WebElement droppablePage;
+    @FindBy(xpath = "//a[@id='droppableExample-tab-accept']")
+    private WebElement acceptTab;
+    @FindBy(xpath = "//div[@id='draggable']")
+    private WebElement simpleObj;
+    @FindBy(xpath = "//div[@id='simpleDropContainer']//div[@id='droppable']")
+    private WebElement simpleTarget;
+    @FindBy(xpath = "//div[@id='acceptable']")
+    private WebElement acceptObj;
+    @FindBy(xpath = "//div[@id='acceptDropContainer']//div[@id='droppable']")
+    private WebElement acceptTarget;
+    @FindBy(xpath = "//div[@id='notAcceptable']")
+    private WebElement notAcceptObj;
+    @FindBy(xpath = "//a[@id='droppableExample-tab-preventPropogation']")
+    private WebElement goPrevProp;
+    @FindBy(xpath = "//div[@id='dragBox']")
+    private WebElement dragBox;
+    @FindBy(xpath = "//div[@id='notGreedyDropBox']")
+    private WebElement outNotGreedy;
+    @FindBy(xpath = "//div[@id='notGreedyInnerDropBox']")
+    private WebElement innerNotGreedy;
+    @FindBy(xpath = "//div[@id='greedyDropBox']")
+    private WebElement outGreedy;
+    @FindBy(xpath = "//div[@id='greedyDropBox']//child::*")
+    private WebElement outGreedyChild;
+    @FindBy(xpath = "//div[@id='greedyDropBoxInner']")
+    private WebElement innerGreedy;
+    @FindBy(xpath = "//a[@id='droppableExample-tab-revertable']")
+    private WebElement goRevert;
+    @FindBy(xpath = "//div[@id='revertable']")
+    private WebElement revertable;
+    @FindBy(xpath = "//div[@id='notRevertable']")
+    private WebElement notRevertable;
+    @FindBy(xpath = "//div[@id='revertableDropContainer']//div[@id='droppable']")
+    private WebElement dropBox;
+    @FindBy(xpath = "//a[@id='droppableExample-tab-accept']")
+    private WebElement goAccept;
+    @FindBy(xpath = "//div[@id='notGreedyDropBox']//*[text() ='Outer droppable']")
+    private WebElement otherDroppable;
 
     public Droppable(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Droppable')]"));
+    public Droppable go() {
+        droppablePage.click();
+        return this;
     }
 
-    public WebElement simpleObj() {
-        return driver.findElement(By.xpath("//div[@id='draggable']"));
+    public Droppable goAccept() {
+        goAccept.click();
+        return this;
     }
 
-    public WebElement simpleTarget() {
-        return driver.findElement(By.xpath("//div[@id='simpleDropContainer']//div[@id='droppable']"));
+    public Droppable goPrevProp() {
+        goPrevProp.click();
+        return this;
     }
 
-    public WebElement goAccept() {
-        return driver.findElement(By.xpath("//a[@id='droppableExample-tab-accept']"));
+    public Droppable goRevert() {
+        goRevert.click();
+        return this;
     }
 
-    public WebElement acceptObj() {
-        return driver.findElement(By.xpath("//div[@id='acceptable']"));
+    public Droppable dragAndDrop(WebElement source, WebElement target) {
+        action.dragAndDrop(source, target).perform();
+        return this;
     }
 
-    public WebElement acceptTarget() {
-        return driver.findElement(By.xpath("//div[@id='acceptDropContainer']//div[@id='droppable']"));
-
+    public Droppable clickAndHoldOffset(WebElement source) {
+        action.clickAndHold(source).moveByOffset(100, 200).perform();
+        return this;
     }
 
-    public WebElement notAcceptObj() {
-        return driver.findElement(By.xpath("//div[@id='notAcceptable']"));
+    public Droppable clickAndHoldToElement(WebElement source, WebElement target) {
+        action.clickAndHold(source).moveToElement(target).perform();
+        return this;
     }
 
-
-    public WebElement goPrevProp() {
-        return driver.findElement(By.xpath("//a[@id='droppableExample-tab-preventPropogation']"));
-
+    public boolean isEquals(WebElement elem, String toCompare) {
+        return elem.getCssValue("background-color").equals(toCompare);
     }
-
-    public WebElement dragBox() {
-        return driver.findElement(By.xpath("//div[@id='dragBox']"));
-
-    }
-
-    public WebElement outNotGreedy() {
-        return driver.findElement(By.xpath("//div[@id='notGreedyDropBox']"));
-
-    }
-
-    public WebElement innerNotGreedy() {
-        return driver.findElement(By.xpath("//div[@id='notGreedyInnerDropBox']"));
-
-    }
-
-    public WebElement outGreedy() {
-        return driver.findElement(By.xpath("//div[@id='greedyDropBox']"));
-    }
-
-    public WebElement outGreedyChild() {
-        return driver.findElement(By.xpath("//div[@id='greedyDropBox']//child::*"));
-    }
-
-    public WebElement innerGreedy() {
-        return driver.findElement(By.xpath("//div[@id='greedyDropBoxInner']"));
-
-    }
-
-    public WebElement goRevert() {
-        return driver.findElement(By.xpath("//a[@id='droppableExample-tab-revertable']"));
-    }
-
-    public WebElement revertable() {
-        return driver.findElement(By.xpath("//div[@id='revertable']"));
-    }
-
-    public WebElement notRevertable() {
-        return driver.findElement(By.xpath("//div[@id='notRevertable']"));
-    }
-
-    public WebElement dropBox() {
-        return driver.findElement(By.xpath("//div[@id='revertableDropContainer']//div[@id='droppable']"));
-    }
-
 
 }

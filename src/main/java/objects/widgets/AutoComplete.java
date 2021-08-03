@@ -1,50 +1,53 @@
 package objects.widgets;
 
-import org.openqa.selenium.By;
+import lombok.Data;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class AutoComplete {
+@Data
+public class AutoComplete extends BasePage {
 
-    private WebDriver driver;
-    private Actions actions;
-    private List<WebElement> list;
+    @FindBy(xpath = "//span[contains(text(),'Auto Complete')]")
+    private WebElement autoCompletePage;
+    @FindBy(xpath = "//div[@id='autoCompleteMultipleContainer']")
+    private WebElement autoCompleteMultiField;
+    @FindBy(xpath = "//div[@id='autoCompleteSingleContainer']")
+    private WebElement autoCompleteSingleField;
+    @FindBy(xpath = "//div[@class='auto-complete__menu-list auto-complete__menu-list--is-multi css-11unzgr']/child::*")
+    private List<WebElement> multiList;
+    @FindBy(xpath = "//div[@class='auto-complete__menu-list css-11unzgr']/child::*")
+    private List<WebElement> singleList;
+
 
     public AutoComplete(WebDriver driver) {
-        this.driver = driver;
-        this.actions = new Actions(driver);
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-       return driver.findElement(By.xpath("//span[contains(text(),'Auto Complete')]"));
+    public AutoComplete go() {
+        autoCompletePage.click();
+        return this;
     }
 
-    public List<WebElement> multiColor(String s) {
-        WebElement elem = driver.findElement(By
-                .xpath("//div[@id='autoCompleteMultipleContainer']"));
-        elem.click();
-        actions.sendKeys(s).build().perform();
-        list = driver.findElements(By
-                .xpath("//div[@class='auto-complete__menu-list auto-complete__menu-list--is-multi css-11unzgr']/child::*"));
-        return list;
+    public AutoComplete multiColor(String s) {
+        autoCompleteMultiField.click();
+        action.sendKeys(s).build().perform();
+        return this;
     }
 
-    public List<WebElement> singleColor(String s) {
-        WebElement elem = driver.findElement(By
-                .xpath("//div[@id='autoCompleteSingleContainer']"));
-        elem.click();
-        actions.sendKeys(s).build().perform();
-        list = driver.findElements(By
-                .xpath("//div[@class='auto-complete__menu-list css-11unzgr']/child::*"));
-        return list;
-
+    public AutoComplete singleColor(String s) {
+        autoCompleteSingleField.click();
+        action.sendKeys(s).build().perform();
+        return this;
     }
 
-    public void selectOption(Integer i) {
+    public AutoComplete selectOption(List<WebElement> list, Integer i) {
         list.get(i).click();
+        return this;
     }
 
 

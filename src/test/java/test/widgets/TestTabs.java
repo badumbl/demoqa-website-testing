@@ -5,21 +5,21 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestTabs extends HelperClass {
+public class TestTabs extends BaseTest {
 
     private Tabs tb;
 
     @BeforeClass
     public void init() {
-        tb = new Tabs(getDriver());
+        tb = new Tabs(driver);
     }
 
     @Test(priority = 1)
     public void goTo() {
         //Scroll is needed, because footer blocks button on smaller monitors
-        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,250)");
         tb.go().click();
     }

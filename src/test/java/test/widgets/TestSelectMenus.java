@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestSelectMenus extends HelperClass {
+public class TestSelectMenus extends BaseTest {
 
     private SelectMenus me;
     private Actions action;
@@ -24,9 +24,9 @@ public class TestSelectMenus extends HelperClass {
 
     @BeforeClass
     public void init() {
-        me = new SelectMenus(getDriver());
-        action = new Actions(getDriver());
-        jse = (JavascriptExecutor) getDriver();
+        me = new SelectMenus(driver);
+        action = new Actions(driver);
+        jse = (JavascriptExecutor) driver;
     }
 
     @Test(priority = 1)

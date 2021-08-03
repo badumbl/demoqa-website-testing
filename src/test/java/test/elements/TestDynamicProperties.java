@@ -1,64 +1,56 @@
 package test.elements;
 
 import objects.elements.DynamicProperties;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import objects.elements.ElementsMenu;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestDynamicProperties extends HelperClass {
+public class TestDynamicProperties extends BaseTest {
 
-    private DynamicProperties dp;
-    private WebElement elem;
+    private DynamicProperties dynamicPropPage;
+    private ElementsMenu em;
+    private final static String COLOR = "mt-4 text-danger btn btn-primary";
 
     @BeforeClass
     public void init() {
-        dp = new DynamicProperties(getDriver());
-
+        dynamicPropPage = new DynamicProperties(driver);
+        em = new ElementsMenu(driver);
+        super.passMainPage();
     }
-
 
     @Test(priority = 1)
     public void goToDynamicProperties() {
-        //Scroll is needed, because footer blocks button on smaller monitors
-        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-        jse.executeScript("window.scrollBy(0,250)");
-        dp.goToDp().click();
+        em.goToElementsMenu();
+        dynamicPropPage.goToDp();
     }
-
-   /* @Test(priority = 2)
-    public void checkFiveSecondButton() throws InterruptedException {
-        elem = dp.checkFiveSec();
-        Assert.assertFalse(elem.isEnabled());
-        Thread.sleep(5000);
-        Assert.assertTrue(elem.isEnabled());
-        elem.click();
-    }*/
 
     @Test(priority = 2)
     public void checkFiveSecondButtonExplicit() {
-        elem = dp.checkFiveSec();
-        Assert.assertFalse(elem.isEnabled());
-        WebDriverWait wait = new WebDriverWait(getDriver(), 6);
-        wait.until(ExpectedConditions.elementToBeClickable(elem));
-        Assert.assertTrue(elem.isEnabled());
+        Assert.assertTrue(
+                dynamicPropPage
+                        .fiveSecondButton()
+                        .isEnabled()
+        );
     }
-
 
     @Test(priority = 3)
     public void checkColorChangeButton() {
-        elem = dp.checkColor();
-        Assert.assertEquals(elem.getAttribute("class"), "mt-4 text-danger btn btn-primary");
+        Assert.assertEquals(
+                dynamicPropPage
+                        .colorButton()
+                        .getAttribute("class"),
+                COLOR
+        );
     }
 
-
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void checkInvisibleButton() {
-        elem = dp.checkInvis();
-        Assert.assertTrue(elem.isDisplayed());
+        Assert.assertTrue(
+                dynamicPropPage
+                        .invisibleButton()
+                        .isDisplayed()
+        );
     }
 }

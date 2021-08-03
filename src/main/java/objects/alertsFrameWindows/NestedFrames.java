@@ -1,32 +1,76 @@
 package objects.alertsFrameWindows;
 
-import org.openqa.selenium.By;
+import objects.BasePage;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class NestedFrames {
+public class NestedFrames extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//span[contains(text(),'Nested Frames')]")
+    private WebElement nestedFramesPage;
+    @FindBy(xpath = "//iframe[@id='frame1']")
+    private WebElement parentFrame;
+    @FindBy(xpath = "//body/iframe[1]")
+    private WebElement childFrame;
+    @FindBy(xpath = "//body")
+    private WebElement parentFrameText;
+    @FindBy(xpath = "//body//p")
+    private WebElement childFrameText;
+
+    public enum FramesAvailable {
+        PARENT, CHILD
+    }
 
     public NestedFrames(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement goTo() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Nested Frames')]"));
+    public NestedFrames goTo() {
+        nestedFramesPage.click();
+        return this;
     }
 
-    public void parentFrame() {
-        driver.switchTo().frame(0);
+    public NestedFrames parentFrame() {
+        driver.switchTo().frame(parentFrame);
+        return this;
     }
 
-    public void childFrame() {
-        driver.switchTo().frame(0);
-        driver.switchTo().frame(0);
-
+    public NestedFrames childFrame() {
+        parentFrame();
+        driver.switchTo().frame(childFrame);
+        return this;
     }
 
-    public void mainFrame() {
+    public NestedFrames mainFrame() {
         driver.switchTo().parentFrame();
+        return this;
+    }
+
+    public boolean isTextCorrect(FramesAvailable frame, String text) {
+        switch (frame) {
+            case PARENT:
+                try {
+                    return parentFrameText.getText().equals(text);
+                } catch (NoSuchElementException e) {
+                    e.printStackTrace();
+                    return false;
+                } finally {
+                    mainFrame();
+                }
+
+            case CHILD:
+            default:
+                try {
+                    return childFrameText.getText().equals(text);
+                } catch (NoSuchElementException e) {
+                    e.printStackTrace();
+                    return false;
+                } finally {
+                    mainFrame();
+                }
+        }
     }
 }

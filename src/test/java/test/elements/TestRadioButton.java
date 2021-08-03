@@ -1,41 +1,58 @@
 package test.elements;
 
+import objects.elements.ElementsMenu;
 import objects.elements.RadioButton;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestRadioButton extends HelperClass {
+public class TestRadioButton extends BaseTest {
 
-    private RadioButton rb;
+    private RadioButton radioButtonPage;
+    private ElementsMenu em;
+    private final static String YES_TEXT = "Yes";
+    private final static String IMPRESSIVE_TEXT = "Impressive";
+    private final static String NO_TEXT = "No";
 
     @BeforeClass
     public void init() {
-        rb = new RadioButton(getDriver());
+        radioButtonPage = new RadioButton(driver);
+        em = new ElementsMenu(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goToRadioButton() {
-        rb.goToRadio().click();
+        em.goToElementsMenu();
+        radioButtonPage.goToRadio();
     }
 
     @Test(priority = 2)
     public void checkYesButton() {
-        rb.checkYes().click();
-        Assert.assertEquals("Yes", getDriver().findElement(By.xpath("//span[@class='text-success']")).getText());
+        Assert.assertTrue(
+                radioButtonPage
+                        .checkYes()
+                        .isTextEquals(YES_TEXT)
+        );
     }
 
     @Test(priority = 2)
     public void checkImpressiveButton() {
-        rb.checkImpr().click();
-        Assert.assertEquals("Impressive", getDriver().findElement(By.xpath("//span[@class='text-success']")).getText());
+        Assert.assertTrue(
+                radioButtonPage
+                        .checkImpr()
+                        .isTextEquals(IMPRESSIVE_TEXT)
+        );
     }
 
     @Test(priority = 2)
     public void checkNoButton() {
-        rb.checkNo().click();
-        Assert.assertNotEquals("No", getDriver().findElement(By.xpath("//span[@class='text-success']")).getText());
+        Assert.assertFalse(
+                radioButtonPage
+                        .checkNo()
+                        .isTextEquals(NO_TEXT)
+        );
     }
 }

@@ -1,35 +1,68 @@
 package test.elements;
 
 
+import objects.elements.ElementsMenu;
 import objects.elements.Links;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-import java.util.ArrayList;
+public class TestLinks extends BaseTest {
 
-public class TestLinks extends HelperClass {
-
-    private Links li;
+    private Links linksPage;
+    private ElementsMenu em;
 
     @BeforeClass
     public void init() {
-        li = new Links(getDriver());
+        linksPage = new Links(driver);
+        em = new ElementsMenu(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
-    public void goToLinks()  {
-        li.start().click();
+    public void goToLinks() {
+        em.goToElementsMenu();
+        linksPage.start();
     }
 
     @Test(priority = 2)
     public void linksNewTab() {
-        li.newTabLink().click();
-        ArrayList<String> tabs2 = new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabs2.get(1));
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/");
-        getDriver().close();
-        getDriver().switchTo().window(tabs2.get(0));
+        Assert.assertEquals(
+                linksPage
+                        .newTabLink()
+                        .switchBetweenTabs(1)
+                        .getCurrentUrl(),
+                BASE_URL
+        );
+        linksPage.switchBetweenTabs(0);
+    }
+
+    @Test(priority = 2)
+    public void testApiCalls() {
+        Assert.assertEquals(
+                super.getStatusCode("created"),
+                201
+        );
+        Assert.assertEquals(
+                super.getStatusCode("no-content"),
+                204
+        );
+        Assert.assertEquals(
+                super.getStatusCode("bad-request"),
+                400
+        );
+        Assert.assertEquals(
+                super.getStatusCode("unauthorized"),
+                401
+        );
+        Assert.assertEquals(
+                super.getStatusCode("forbidden"),
+                403
+        );
+        Assert.assertEquals(
+                super.getStatusCode("invalid-url"),
+                404
+        );
     }
 }

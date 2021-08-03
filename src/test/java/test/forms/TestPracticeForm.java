@@ -1,103 +1,73 @@
 package test.forms;
 
 import objects.forms.PracticeForm;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
-public class TestPracticeForm extends HelperClass {
+public class TestPracticeForm extends BaseTest {
 
-    private PracticeForm pf;
-    private String fName = "First Name";
-    private String lName = "Last Name";
-    private String email = "email@test.com";
-    private String gender = "Male";
-    private String mobile = "1234567890";
-    private String dayBirth = "001";
-    private String monthBirth = "January";
-    private int yearBirth = 1988;
-    private ArrayList<String> subjects = new ArrayList<>();
-    private String subjectsFormatted = "";
-    private String hobbies = "Sports";
-    private String address = "test address 123";
-    private String state = "Rajasthan";
-    private String city = "Jaipur";
+    private PracticeForm practiceFormPage;
+    private static String subjectsFormatted = "";
+
+    private final static String fName = "First Name";
+    private final static String lName = "Last Name";
+    private final static String email = "email@test.com";
+    private final static String gender = "Male";
+    private final static String mobile = "1234567890";
+    private final static String dayBirth = "001";
+    private final static String monthBirth = "January";
+    private final static int yearBirth = 1988;
+    private final static String fullDateOfBirth = "01 January,1988";
+    private final static ArrayList<String> subjects = new ArrayList<>();
+    private final static String hobbies = "Sports";
+    private final static String address = "test address 123";
+    private final static String state = "Rajasthan";
+    private final static String city = "Jaipur";
 
 
     @BeforeClass
     public void init() {
-        pf = new PracticeForm(getDriver());
+        practiceFormPage = new PracticeForm(driver);
         subjects.add("Computer Science");
         subjects.add("English");
         subjects.add("Arts");
         super.passMainPage();
-
     }
 
     @Test(priority = 1)
     public void goToForms() {
-        pf.goToForm().click();
-        waiting(pf.goToPractice());
-        pf.goToPractice().click();
-
+        practiceFormPage.goToForms();
+        practiceFormPage.goToPractice();
     }
 
     @Test(priority = 2)
-    public void fillTheForm() throws InterruptedException {
-        pf.fillForm(fName, lName, email, gender, mobile, dayBirth, monthBirth, yearBirth, subjects,
+    public void fillTheForm() {
+        practiceFormPage.fillForm(fName, lName, email, gender, mobile, dayBirth, monthBirth, yearBirth, subjects,
                 hobbies, address, state, city);
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Student Name')]//following::td")).getText(),
-                fName + " " + lName);
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Student Email')]//following::td")).getText(),
-                email);
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Gender')]//following::td")).getText(),
-                gender);
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Mobile')]//following::td")).getText(),
-                mobile);
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Date of Birth')]//following::td")).getText(),
-                "01 January,1988");
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Subjects')]//following::td")).getText(),
-                subjectsFormat());
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Hobbies')]//following::td")).getText(),
-                hobbies);
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'Address')]//following::td")).getText(),
-                address);
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//tr//td[contains(text(), 'State and City')]//following::td")).getText(),
-                state + " " + city);
-        getDriver().findElement(By.xpath("//*[@id='closeLargeModal']")).click();
+        Assert.assertEquals(practiceFormPage.getNameResult().getText(), fName + " " + lName);
+        Assert.assertEquals(practiceFormPage.getEmailResult().getText(), email);
+        Assert.assertEquals(practiceFormPage.getGenderResult().getText(), gender);
+        Assert.assertEquals(practiceFormPage.getMobileResult().getText(), mobile);
+        Assert.assertEquals(practiceFormPage.getDateOfBirthResult().getText(), fullDateOfBirth);
+        Assert.assertEquals(practiceFormPage.getSubjectsResult().getText(), subjectsFormat());
+        Assert.assertEquals(practiceFormPage.getHobbiesResult().getText(), hobbies);
+        Assert.assertEquals(practiceFormPage.getAddressResult().getText(), address);
+        Assert.assertEquals(practiceFormPage.getStatCityResult().getText(), state + " " + city);
+        practiceFormPage.closeResults();
     }
 
     @Test(priority = 3)
     public void fillTheFormIncorrectly() {
-        getDriver().findElement(By.xpath("//button[@id='submit']")).click();
-        Wait<WebDriver> wait = new FluentWait<>(getDriver())
-                .withTimeout(15, TimeUnit.SECONDS)
-                .pollingEvery(1, TimeUnit.MILLISECONDS)
-                .ignoring(NoSuchElementException.class);
-        wait.until((WebDriver) -> getDriver().findElement(By.xpath("//input[@id = 'userNumber']"))
-                .getCssValue("border-color").equals("rgb(220, 53, 69)"));
-        Assert.assertEquals(getDriver()
-                        .findElement(By.xpath("//input[@id = 'userNumber']")).getCssValue("border-color"),
-                "rgb(220, 53, 69)");
+        driver.navigate().refresh();
+        Assert.assertTrue(
+                practiceFormPage
+                        .submitData()
+                        .isHighlighted("rgb(220, 53, 69)")
+        );
     }
 
     public String subjectsFormat() {

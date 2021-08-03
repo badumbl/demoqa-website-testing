@@ -1,18 +1,24 @@
 package objects.interactions;
 
-import org.openqa.selenium.By;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Interactions {
+public class Interactions extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//div[contains(text(), 'Interactions')]")
+    private WebElement interactionsPage;
+    @FindBy(xpath = "//span[contains(text(),'Droppable')]")
+    private WebElement droppablePage;
 
     public Interactions(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//div[contains(text(), 'Interactions')]"));
+    public Interactions go() {
+        interactionsPage.click();
+        waitVisibility(droppablePage);
+        return this;
     }
 }

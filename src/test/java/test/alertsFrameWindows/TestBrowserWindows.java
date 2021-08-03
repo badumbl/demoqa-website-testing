@@ -1,58 +1,47 @@
 package test.alertsFrameWindows;
 
+import objects.alertsFrameWindows.AlFrWi;
 import objects.alertsFrameWindows.BrowserWindows;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-import java.util.ArrayList;
 
-public class TestBrowserWindows extends HelperClass {
+public class TestBrowserWindows extends BaseTest {
 
-    private BrowserWindows bw;
+    private BrowserWindows browserWindowsPage;
+    private AlFrWi afw;
+    private static final String URL_TO_COMPARE = "https://demoqa.com/sample";
 
     @BeforeClass
     public void init() {
-        bw = new BrowserWindows(getDriver());
+        browserWindowsPage = new BrowserWindows(driver);
+        super.passMainPage();
+        afw = new AlFrWi(driver);
     }
 
     @Test(priority = 1)
     public void goTo() {
-        waiting(bw.go());
-        bw.go().click();
-        waiting(bw.newTab());
+        afw.go();
+        browserWindowsPage.go();
     }
 
     @Test(priority = 2)
     public void newTabButton() {
-        bw.newTab().click();
-        ArrayList<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabs.get(1));
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/sample");
-        getDriver().close();
-        getDriver().switchTo().window(tabs.get(0));
+        Assert.assertTrue(
+                browserWindowsPage
+                        .newTab()
+                        .isUrlCorrect(URL_TO_COMPARE)
+        );
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void newWindowButton() {
-        bw.newWindow().click();
-        ArrayList<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabs.get(1));
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://demoqa.com/sample");
-        getDriver().close();
-        getDriver().switchTo().window(tabs.get(0));
+        Assert.assertTrue(
+                browserWindowsPage
+                        .newWindow()
+                        .isUrlCorrect(URL_TO_COMPARE)
+        );
     }
-
-    //TBU
-    @Test(priority = 2)
-    public void newWindowMessageButton() {
-       /* bw.newWindowMessage().click();
-        ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabs.get(1));
-        Assert.assertEquals(getDriver().getCurrentUrl(),"about:blank");
-        getDriver().close();
-        getDriver().switchTo().window(tabs.get(0));*/
-    }
-
 }

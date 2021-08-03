@@ -1,18 +1,27 @@
 package objects.elements;
 
-import org.openqa.selenium.By;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class ElementsMenu {
-    private final WebDriver driver;
+public class ElementsMenu extends BasePage {
+
+
+    @FindBy(xpath = "//div[contains(text(),'Elements')]")
+    private WebElement elementsMenuPage;
+    @FindBy(xpath = "//span[contains(text(), 'Dynamic Properties')]")
+    private WebElement dynamicPropertiesPage;
 
     public ElementsMenu(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public WebElement goToElementsMenu() {
-       return driver.findElement(By.xpath("//div[contains(text(),'Elements')]"));
+    public ElementsMenu goToElementsMenu() {
+        waitVisibility(elementsMenuPage);
+        elementsMenuPage.click();
+        waitVisibility(dynamicPropertiesPage);
+        return this;
     }
 }
 

@@ -1,41 +1,46 @@
 package test.alertsFrameWindows;
 
+import objects.alertsFrameWindows.AlFrWi;
 import objects.alertsFrameWindows.Frames;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestFrames extends HelperClass {
+public class TestFrames extends BaseTest {
 
-    private Frames fr;
+    private Frames framesPage;
+    private AlFrWi afw;
+    private static final String textToCheck = "This is a sample page";
 
     @BeforeClass
     public void init() {
-        fr = new Frames(getDriver());
-
+        framesPage = new Frames(driver);
+        super.passMainPage();
+        afw = new AlFrWi(driver);
     }
 
     @Test(priority = 1)
     public void goTo() {
-        fr.go().click();
+        afw.go();
+        framesPage.go();
     }
 
     @Test(priority = 2)
     public void bigFrame() {
-        fr.big();
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1[@id='sampleHeading']")).getText(),
-                "This is a sample page");
-        fr.mainFrame();
+        Assert.assertTrue(
+                framesPage
+                        .big()
+                        .isTextRight(textToCheck)
+        );
     }
 
     @Test(priority = 2)
     public void smallFrame() {
-        fr.small();
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1[@id='sampleHeading']")).getText(),
-                "This is a sample page");
-        fr.mainFrame();
+        Assert.assertTrue(
+                framesPage
+                        .small()
+                        .isTextRight(textToCheck)
+        );
     }
-
 }

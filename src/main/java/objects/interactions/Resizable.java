@@ -1,26 +1,37 @@
 package objects.interactions;
 
-import org.openqa.selenium.By;
+import lombok.Data;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Resizable {
+@Data
+public class Resizable extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//span[contains(text(),'Resizable')]")
+    private WebElement resizablePage;
+    @FindBy(xpath = "//div[@id='resizableBoxWithRestriction']//child::span")
+    private WebElement resizeInside;
+    @FindBy(xpath = "//div[@id='resizable']//child::span")
+    private WebElement resizeOutside;
+    @FindBy(xpath = "//div[@id='resizableBoxWithRestriction']")
+    private WebElement resizableRestrictions;
+    @FindBy(xpath = "//div[@id='resizable']")
+    private WebElement resizable;
 
     public Resizable(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Resizable')]"));
+    public Resizable go() {
+        resizablePage.click();
+        return this;
     }
 
-    public WebElement resizeInside() {
-        return driver.findElement(By.xpath("//div[@id='resizableBoxWithRestriction']//child::span"));
-    }
-
-    public WebElement resizeOutside() {
-        return driver.findElement(By.xpath("//div[@id='resizable']//child::span"));
+    public Resizable dragAndDropOffset(WebElement source, int x, int y) {
+        action.dragAndDropBy(source, x, y).perform();
+        return this;
     }
 }

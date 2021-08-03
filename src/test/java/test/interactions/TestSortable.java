@@ -1,71 +1,57 @@
 package test.interactions;
 
+import objects.interactions.Interactions;
 import objects.interactions.SortableObj;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-import java.util.Arrays;
-import java.util.List;
 
-public class TestSortable extends HelperClass {
+public class TestSortable extends BaseTest {
 
-    private SortableObj sor;
-    private Actions action;
-    private String nameOfFirstObjectFromList = "One";
-    private String nameOfSecondObjectFromList = "Five";
-    private List<WebElement> list;
-    private List<WebElement> grid;
+    private SortableObj sortablePage;
+    private Interactions inter;
+    private final static String FIRST_OBJECT = "One";
+    private final static String SECOND_OBJECT = "Two";
+    private final static String FIFTH_OBJECT = "Five";
 
     @BeforeClass
     public void init() {
-        sor = new SortableObj(getDriver());
-        action = new Actions(getDriver());
+        sortablePage = new SortableObj(driver);
+        inter = new Interactions(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        waiting(sor.go());
-        sor.go().click();
+        inter.go();
+        sortablePage.go();
     }
 
     @Test(priority = 2)
     public void sortList() {
-        list = sor.fillTheList();
-        sor.goToList().click();
-        waiting(list.get(0));
-        WebElement elem = sor.getFromList(nameOfFirstObjectFromList);
-        WebElement elem2 = sor.getFromList(nameOfSecondObjectFromList);
-        try {
-            action.moveToElement(elem);
-            action.dragAndDrop(elem, elem2).perform();
-        } catch (NullPointerException nul) {
-            System.out.println(Arrays.toString(nul.getStackTrace()));
-        }
-        Assert.assertEquals(list.get(0).getText(),"Two");
-        Assert.assertEquals(list.get(3).getText(),"Five");
-        Assert.assertEquals(list.get(4).getText(),"One");
+        sortablePage
+                .goToList()
+                .dragAndDrop(sortablePage.getFromList(FIRST_OBJECT),
+                        sortablePage.getFromList(FIFTH_OBJECT));
+
+        Assert.assertEquals(sortablePage.getListElements().get(0).getText(), SECOND_OBJECT);
+        Assert.assertEquals(sortablePage.getListElements().get(3).getText(), FIFTH_OBJECT);
+        Assert.assertEquals(sortablePage.getListElements().get(4).getText(), FIRST_OBJECT);
     }
+
 
     @Test(priority = 3)
     public void sortGrid() {
-        grid = sor.fillTheGrid();
-        sor.goToGrid().click();
-        waiting(grid.get(0));
-        WebElement elem = sor.getFromGrid(nameOfFirstObjectFromList);
-        WebElement elem2 = sor.getFromGrid(nameOfSecondObjectFromList);
-        try {
-            action.moveToElement(elem);
-            action.dragAndDrop(elem, elem2).perform();
-        } catch (NullPointerException nul) {
-            System.out.println(Arrays.toString(nul.getStackTrace()));
-        }
-        Assert.assertEquals(grid.get(0).getText(),"Two");
-        Assert.assertEquals(grid.get(3).getText(),"Five");
-        Assert.assertEquals(grid.get(4).getText(),"One");
+        sortablePage
+                .goToGrid()
+                .dragAndDrop(sortablePage.getFromGrid(FIRST_OBJECT),
+                        sortablePage.getFromGrid(FIFTH_OBJECT));
+
+        Assert.assertEquals(sortablePage.getGridElements().get(0).getText(), SECOND_OBJECT);
+        Assert.assertEquals(sortablePage.getGridElements().get(3).getText(), FIFTH_OBJECT);
+        Assert.assertEquals(sortablePage.getGridElements().get(4).getText(), FIRST_OBJECT);
     }
 
 }

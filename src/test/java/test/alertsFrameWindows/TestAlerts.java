@@ -1,75 +1,91 @@
 package test.alertsFrameWindows;
 
+import objects.alertsFrameWindows.AlFrWi;
 import objects.alertsFrameWindows.Alerts;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
 
-public class TestAlerts extends HelperClass {
+public class TestAlerts extends BaseTest {
 
-    private Alerts al;
-    private String text = "Test for alert text";
+    private Alerts alertsPage;
+    private AlFrWi afw;
+    private static final String TEXT_FOR_ALERT_INPUT = "Test for alert text";
+    private static final String ALERT_BUTTON_TEXT = "You clicked a button";
+    private static final String ALERT_FIVE_SEC_BUTTON_TEXT = "This alert appeared after 5 seconds";
+    private static final String ALERT_CONFIRM_BUTTON_TEXT = "Do you confirm action?";
+    private static final String ALERT_CONFIRMED_TEXT = "You selected Ok";
+    private static final String ALERT_DECLINED_TEXT = "You selected Cancel";
+    private static final String ALERT_PROMPT_BUTTON_TEXT = "Please enter your name";
+    private static final String ALERT_PROMPT_Result_TEXT = "You entered " + TEXT_FOR_ALERT_INPUT;
 
     @BeforeClass
     public void init() {
-        al = new Alerts(getDriver());
+        alertsPage = new Alerts(driver);
+        super.passMainPage();
+        afw = new AlFrWi(driver);
     }
 
     @Test(priority = 1)
     public void goToAlerts() {
-        al.goAlerts().click();
+        afw.go();
+        alertsPage.goAlerts();
     }
 
     @Test(priority = 2)
     public void alertButton() {
-        al.alert().click();
-        Assert.assertEquals(getDriver().switchTo().alert().getText(), "You clicked a button");
-        acceptAlert();
+        Assert.assertTrue(
+                alertsPage
+                        .alertButton()
+                        .isAlertTextRight(ALERT_BUTTON_TEXT)
+        );
+        alertsPage.acceptAlert();
     }
 
     @Test(priority = 2)
     public void alertFiveButton() {
-        al.alertFive().click();
-        new WebDriverWait(getDriver(), 6)
-                .until(ExpectedConditions.alertIsPresent());
-        Assert.assertEquals(getDriver().switchTo().alert().getText(), "This alert appeared after 5 seconds");
-        acceptAlert();
+        Assert.assertTrue(
+                alertsPage
+                        .alertFiveSec()
+                        .waitTillAlert()
+                        .isAlertTextRight(ALERT_FIVE_SEC_BUTTON_TEXT));
+        alertsPage.acceptAlert();
     }
 
     @Test(priority = 2)
     public void alertConfirmButton() {
-        al.alertConfirm().click();
-        Assert.assertEquals(getDriver().switchTo().alert().getText(), "Do you confirm action?");
-        acceptAlert();
-        Assert.assertEquals(getDriver().findElement(By.xpath("//span[@id='confirmResult']")).getText(), "You selected Ok");
-        al.alertConfirm().click();
-        Assert.assertEquals(getDriver().switchTo().alert().getText(), "Do you confirm action?");
-        declineAlert();
-        Assert.assertEquals(getDriver().findElement(By.xpath("//span[@id='confirmResult']")).getText(), "You selected Cancel");
-
+        Assert.assertTrue(
+                alertsPage
+                        .alertConfirm()
+                        .isAlertTextRight(ALERT_CONFIRM_BUTTON_TEXT)
+        );
+        Assert.assertTrue(
+                alertsPage
+                        .acceptAlert()
+                        .isAlertConfirmResultRight(ALERT_CONFIRMED_TEXT)
+        );
+        Assert.assertTrue(
+                alertsPage
+                        .alertConfirm()
+                        .declineAlert()
+                        .isAlertConfirmResultRight(ALERT_DECLINED_TEXT)
+        );
     }
 
     @Test(priority = 2)
     public void alertPromptButton() {
-        al.alertPrompt().click();
-        Assert.assertEquals(getDriver().switchTo().alert().getText(), "Please enter your name");
-        getDriver().switchTo().alert().sendKeys(text);
-        acceptAlert();
-        Assert.assertEquals(getDriver().findElement(By.xpath("//span[@id='promptResult']")).getText(),
-                "You entered " + text);
+        Assert.assertTrue(
+                alertsPage
+                        .alertPrompt()
+                        .isAlertTextRight(ALERT_PROMPT_BUTTON_TEXT)
+        );
+        Assert.assertTrue(
+                alertsPage
+                        .sendKeysToAlert(TEXT_FOR_ALERT_INPUT)
+                        .acceptAlert()
+                        .isAlertPromptResultRight(ALERT_PROMPT_Result_TEXT)
+        );
     }
-
-    public void acceptAlert() {
-        getDriver().switchTo().alert().accept();
-    }
-
-    public void declineAlert() {
-        getDriver().switchTo().alert().dismiss();
-    }
-
 }

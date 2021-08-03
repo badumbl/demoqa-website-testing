@@ -1,56 +1,57 @@
 package test.widgets;
 
 import objects.widgets.Accordian;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import objects.widgets.Widgets;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-public class TestAccordian extends HelperClass {
+public class TestAccordian extends BaseTest {
 
-    private Accordian acc;
+    private Accordian accordianPage;
+    private Widgets wd;
 
     @BeforeClass
     public void init() {
-        acc = new Accordian(getDriver());
+        accordianPage = new Accordian(driver);
+        wd = new Widgets(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        waiting(acc.go());
-        acc.go().click();
+        wd.go();
+        accordianPage.go();
     }
 
     @Test(priority = 3)
     public void whatIsLorem() {
-        acc.whatIs().click();
-        waitCollapsed("//div[@id='section1Heading']/following-sibling::div");
-        Assert.assertTrue(getDriver().findElement(By.xpath("//div[@id='section1Content']//p")).isDisplayed());
+        Assert.assertTrue(
+                accordianPage
+                        .whatIs()
+                        .getWhatIsContent()
+                        .isDisplayed()
+        );
     }
 
     @Test(priority = 2)
     public void whereDoesLorem() {
-        acc.whereDoes().click();
-        waitCollapsed("//div[@id='section2Heading']/following-sibling::div");
-        Assert.assertTrue(getDriver().findElement(By.xpath("//div[@id='section2Content']//p")).isDisplayed());
+        Assert.assertTrue(
+                accordianPage
+                        .whereDoes()
+                        .getWhereDoesContent()
+                        .isDisplayed()
+        );
     }
 
     @Test(priority = 2)
     public void whyDoLorem() {
-        acc.whyDo().click();
-        waitCollapsed("//div[@id='section3Heading']/following-sibling::div");
-        Assert.assertTrue(getDriver().findElement(By.xpath("//div[@id='section3Content']//p")).isDisplayed());
+        Assert.assertTrue(
+                accordianPage
+                        .whyDo()
+                        .getWhyDoContent()
+                        .isDisplayed()
+        );
     }
-
-    private void waitCollapsed(String s) {
-        WebElement elem = getDriver().findElement(By.xpath(s));
-        new WebDriverWait(getDriver(), 10).until(ExpectedConditions
-                .attributeContains(elem, "class", "collapse show"));
-    }
-
-
 }

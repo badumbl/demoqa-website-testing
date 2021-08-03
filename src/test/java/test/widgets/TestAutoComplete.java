@@ -1,49 +1,65 @@
 package test.widgets;
 
 import objects.widgets.AutoComplete;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import objects.widgets.Widgets;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
-import java.util.List;
+public class TestAutoComplete extends BaseTest {
 
-public class TestAutoComplete extends HelperClass {
-
-    private AutoComplete ac;
-    private String multiColorsChecker = "a";
-    private String singleColorsChecker = "r";
+    private AutoComplete autoCompletePage;
+    private Widgets wd;
+    private final static String MULTI_COLORS_CHECKER = "a";
+    private final static String SINGLE_COLORS_CHECKER = "r";
 
     @BeforeClass
     public void init() {
-        ac = new AutoComplete(getDriver());
+        autoCompletePage = new AutoComplete(driver);
+        wd = new Widgets(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        ac.go().click();
+        wd.go();
+        autoCompletePage.go();
     }
 
     @Test(priority = 2)
     public void multiColorNames() {
-        List<WebElement> list = ac.multiColor(multiColorsChecker);
-        Assert.assertEquals(list.size(), 3);
-        ac.selectOption(1);
-        list = ac.multiColor(multiColorsChecker);
-        ac.selectOption(1);
-        Assert.assertEquals(getDriver().findElement(By.xpath("//div[@id='autoCompleteMultipleContainer']")).getText(),
-                " option Aqua, selected.\nMagenta\nAqua");
+        Assert.assertEquals(
+                autoCompletePage
+                        .multiColor(MULTI_COLORS_CHECKER)
+                        .getMultiList().size(),
+                3
+        );
+        Assert.assertEquals(
+                autoCompletePage
+                        .multiColor(MULTI_COLORS_CHECKER)
+                        .selectOption(autoCompletePage.getMultiList(), 1)
+                        .multiColor(MULTI_COLORS_CHECKER)
+                        .selectOption(autoCompletePage.getMultiList(), 1)
+                        .getAutoCompleteMultiField().getText(),
+                " option Aqua, selected.\nMagenta\nAqua"
+        );
     }
 
     @Test(priority = 2)
     public void singleColorNames() {
-        List<WebElement> list = ac.singleColor(singleColorsChecker);
-        Assert.assertEquals(list.size(), 3);
-        ac.selectOption(2);
-        Assert.assertEquals(getDriver().findElement(By.xpath("//div[@id='autoCompleteSingleContainer']")).getText(),
-                " option Purple, selected.\nPurple");
+        Assert.assertEquals(
+                autoCompletePage
+                        .singleColor(SINGLE_COLORS_CHECKER)
+                        .selectOption(autoCompletePage.getSingleList(), 2)
+                        .getAutoCompleteSingleField().getText(),
+                " option Purple, selected.\nPurple"
+        );
+        Assert.assertEquals(
+                autoCompletePage
+                        .singleColor(SINGLE_COLORS_CHECKER)
+                        .getSingleList().size(),
+                3
+        );
     }
-
 }

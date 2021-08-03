@@ -1,18 +1,25 @@
 package objects.alertsFrameWindows;
 
-import org.openqa.selenium.By;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class AlFrWi {
+public class AlFrWi extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//div[contains(text(),'Alerts, Frame & Windows')]")
+    private WebElement alFrWi;
+    @FindBy(xpath = "//span[contains(text(),'Alerts')]")
+    private WebElement alertPage;
 
     public AlFrWi(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public WebElement go() {
-       return driver.findElement(By.xpath("//div[contains(text(),'Alerts, Frame & Windows')]"));
+    public AlFrWi go() {
+        waitVisibility(alFrWi);
+        alFrWi.click();
+        waitVisibility(alertPage);
+        return this;
     }
 }

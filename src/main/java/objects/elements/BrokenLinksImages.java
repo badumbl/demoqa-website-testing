@@ -1,21 +1,28 @@
 package objects.elements;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class BrokenLinksImages {
+public class BrokenLinksImages extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = "//span[contains(text(),'Broken Links - Images')]")
+    private WebElement brokenLinksPage;
+    @FindBy(xpath = "//a[contains(text(),'Click Here for Broken Link')]")
+    private WebElement brokenLink;
 
     public BrokenLinksImages(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement goToBrokenLinks() {
+    public BrokenLinksImages goToBrokenLinks() {
+        brokenLinksPage.click();
+        return this;
+    }
 
-        return driver.findElement(By.xpath("//span[contains(text(),'Broken Links - Images')]"));
-
+    public String brokenLink() {
+        return brokenLink.getAttribute("href");
     }
 }

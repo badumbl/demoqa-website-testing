@@ -1,81 +1,83 @@
 package test.interactions;
 
+import objects.interactions.Interactions;
 import objects.interactions.SelectableObj;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.HelperClass;
+import test.BaseTest;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
-public class TestSelectable extends HelperClass {
+public class TestSelectable extends BaseTest {
 
-    private SelectableObj selob;
-    private String firstSelection = "Cras justo odio";
-    private String secondSelection = "Morbi leo risus";
-    private String firstSelectionGrid = "One";
-    private String secondSelectionGrid = "Eight";
+    private SelectableObj selectablePage;
+    private Interactions inter;
+    private final static String FIRST_SELECTION = "Cras justo odio";
+    private final static String SECOND_SELECTION = "Morbi leo risus";
+    private final static String FIRST_SELECTION_GRID = "One";
+    private final static String SECOND_SELECTION_GRID = "Eight";
+    private final static String SELECTED_CLASS_LIST = "mt-2 list-group-item active list-group-item-action";
+    private final static String SELECTED_CLASS_GRID = "list-group-item active list-group-item-action";
 
-    private List<WebElement> list;
-    private List<WebElement> grid;
 
     @BeforeClass
     public void init() {
-        selob = new SelectableObj(getDriver());
+        selectablePage = new SelectableObj(driver);
+        inter = new Interactions(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        selob.go().click();
+        inter.go();
+        selectablePage.go();
     }
 
     @Test(priority = 2)
     public void checkList() {
-        selob.goToList().click();
-        list = selob.getList();
+        selectablePage.goToList();
+
         try {
-            Objects.requireNonNull(goThroughList(firstSelection, list)).click();
-            Objects.requireNonNull(goThroughList(secondSelection, list)).click();
+            Assert.assertEquals(
+                    selectablePage
+                            .chooseElementList(FIRST_SELECTION)
+                            .goThroughList(FIRST_SELECTION, selectablePage.getList())
+                            .getAttribute("class"),
+                    SELECTED_CLASS_LIST
+            );
+            Assert.assertEquals(
+                    selectablePage
+                            .chooseElementList(SECOND_SELECTION)
+                            .goThroughList(SECOND_SELECTION, selectablePage.getList())
+                            .getAttribute("class"),
+                    SELECTED_CLASS_LIST
+            );
         } catch (NullPointerException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
-        Assert.assertEquals(getDriver()
-                .findElement(By.xpath("//li[contains(text(),'" + firstSelection + "')]"))
-                .getAttribute("class"), "mt-2 list-group-item active list-group-item-action");
-        Assert.assertEquals(getDriver()
-                .findElement(By.xpath("//li[contains(text(),'" + secondSelection + "')]"))
-                .getAttribute("class"), "mt-2 list-group-item active list-group-item-action");
     }
 
     @Test(priority = 3)
     public void checkGrid() {
-        selob.goToGrid().click();
-        grid = selob.getGrid();
         try {
-            Objects.requireNonNull(goThroughList(firstSelectionGrid, grid)).click();
-            Objects.requireNonNull(goThroughList(secondSelectionGrid, grid)).click();
+            Assert.assertEquals(
+                    selectablePage
+                            .chooseElementGrid(FIRST_SELECTION_GRID)
+                            .goThroughList(FIRST_SELECTION_GRID, selectablePage.getGrid())
+                            .getAttribute("class"),
+                    SELECTED_CLASS_GRID
+            );
+            Assert.assertEquals(
+                    selectablePage
+                            .chooseElementGrid(SECOND_SELECTION_GRID)
+                            .goThroughList(SECOND_SELECTION_GRID, selectablePage.getGrid())
+                            .getAttribute("class"),
+                    SELECTED_CLASS_GRID
+            );
         } catch (NullPointerException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
-        Assert.assertEquals(getDriver()
-                .findElement(By.xpath("//li[contains(text(),'" + firstSelectionGrid + "')]"))
-                .getAttribute("class"), "list-group-item active list-group-item-action");
-        Assert.assertEquals(getDriver()
-                .findElement(By.xpath("//li[contains(text(),'" + secondSelectionGrid + "')]"))
-                .getAttribute("class"), "list-group-item active list-group-item-action");
-    }
-
-    private WebElement goThroughList(String name, List<WebElement> theList) {
-        for (WebElement elem : theList) {
-            if (elem.getText().equals(name)) {
-                return elem;
-            }
-        }
-        return null;
     }
 
 
