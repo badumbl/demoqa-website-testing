@@ -1,91 +1,75 @@
 package test.widgets;
 
 import objects.widgets.SelectMenus;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import objects.widgets.Widgets;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
 public class TestSelectMenus extends BaseTest {
 
-    private SelectMenus me;
-    private Actions action;
-    private JavascriptExecutor jse;
-    private String selectValueOption = "Group 2, option 1";
-    private String selectOneOption = "Prof.";
-    private String selectOldOption = "Indigo";
-    private String selectStandardMultiOption1 = "Saab";
-    private String selectStandardMultiOption2 = "Audi";
-    private String selectMulti1 = "Green";
-    private String selectMulti2 = "Black";
+    private SelectMenus selectMenusPage;
+    private Widgets wd;
+    private final static String selectValueOption = "Group 2, option 1";
+    private final static String selectOneOption = "Prof.";
+    private final static String selectOldOption = "Indigo";
+    private final static String selectStandardMultiOption1 = "Saab";
+    private final static String selectStandardMultiOption2 = "Audi";
+    private final static String selectMulti1 = "Green";
+    private final static String selectMulti2 = "Black";
 
     @BeforeClass
     public void init() {
-        me = new SelectMenus(driver);
-        action = new Actions(driver);
-        jse = (JavascriptExecutor) driver;
+        selectMenusPage = new SelectMenus(driver);
+        wd = new Widgets(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        //Scroll is needed, because footer blocks button on smaller monitors
-        jse.executeScript("window.scrollBy(0,250)");
-        me.go().click();
+        wd.go();
+        selectMenusPage.go();
     }
 
     @Test(priority = 2)
-    public void selectValueMenu() {
-        jse.executeScript("arguments[0].scrollIntoView();", me.selectValue());
-        action.moveToElement(me.selectValue()).click().perform();
-        multiSelectHelper(me.selectValueChoose(selectValueOption));
+    public void selectValueMenu()  {
+        Assert.assertEquals(
+                selectMenusPage
+                        .selectValue(selectValueOption)
+                        .getSelectedValue().getText(),
+                selectValueOption
+        );
     }
 
     @Test(priority = 3)
     public void selectOneMenu() {
-        action.moveToElement(me.selectOne()).click().perform();
-        multiSelectHelper(me.selectValueChoose(selectOneOption));
+        Assert.assertEquals(
+                selectMenusPage
+                        .selectOne(selectOneOption)
+                        .getSelectedOne().getText(),
+                selectOneOption
+        );
     }
-
-    @Test(priority = 3)
-    public void oldStyleSelectMenu() {
-        action.moveToElement(me.oldStyle()).click().perform();
-        multiSelectHelper(me.selectOldStyle(selectOldOption));
-
-    }
-
 
     @Test(priority = 4)
+    public void oldStyleSelectMenu() {
+        selectMenusPage
+                .selectOldStyle(selectOldOption);
+    }
+
+
+    @Test(priority = 5)
     public void multiSelectMenu() {
-        action.moveToElement(me.multiSelect()).click().perform();
-        multiSelectHelper(me.selectValueChoose(selectMulti1));
-        multiSelectHelper(me.selectValueChoose(selectMulti2));
-        action.sendKeys(Keys.ESCAPE).perform();
+        selectMenusPage
+                .multiSelect(selectMulti1, selectMulti2);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 6)
     public void standartMultiSelectMenu() {
-        if (me.standartMultiChoose(selectStandardMultiOption1) != null &&
-                me.standartMultiChoose(selectStandardMultiOption2) != null) {
-            me.standartMultiChoose(selectStandardMultiOption1).click();
-            action
-                    .keyDown(Keys.LEFT_CONTROL)
-                    .moveToElement(me.standartMultiChoose(selectStandardMultiOption2))
-                    .click()
-                    .release()
-                    .perform();
-        } else {
-            System.out.println("Element not found");
-        }
-    }
+        selectMenusPage
+                .standartMultiChoose(selectStandardMultiOption1, selectStandardMultiOption2);
 
-    private void multiSelectHelper(WebElement webElement2) {
-        if (webElement2 != null) {
-            webElement2.click();
-        } else {
-            System.out.println("Element not found");
-        }
     }
 }

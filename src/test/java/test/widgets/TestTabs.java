@@ -1,7 +1,7 @@
 package test.widgets;
 
 import objects.widgets.Tabs;
-import org.openqa.selenium.JavascriptExecutor;
+import objects.widgets.Widgets;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -9,44 +9,53 @@ import test.BaseTest;
 
 public class TestTabs extends BaseTest {
 
-    private Tabs tb;
+    private Tabs tabsPage;
+    private Widgets wd;
 
     @BeforeClass
     public void init() {
-        tb = new Tabs(driver);
+        tabsPage = new Tabs(driver);
+        wd = new Widgets(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        //Scroll is needed, because footer blocks button on smaller monitors
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("window.scrollBy(0,250)");
-        tb.go().click();
+        wd.go();
+        tabsPage.go();
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void whatTab() {
-        tb.whatB().click();
-        Assert.assertEquals(tb.whatB().getAttribute("aria-selected"), "true");
-        Assert.assertEquals(tb.whatT().getAttribute("class"), "fade tab-pane active show");
+        Assert.assertTrue(
+                tabsPage.whatB()
+                        .isButtonSelected(tabsPage.getWhatButton())
+        );
+        Assert.assertTrue(tabsPage.isTextVisible(tabsPage.getWhatText()));
     }
 
     @Test(priority = 2)
     public void originTab() {
-        tb.originB().click();
-        Assert.assertEquals(tb.originB().getAttribute("aria-selected"), "true");
-        Assert.assertEquals(tb.originT().getAttribute("class"), "fade tab-pane active show");
+        Assert.assertTrue(
+                tabsPage
+                        .originB()
+                        .isButtonSelected(tabsPage.getOriginButton())
+        );
+        Assert.assertTrue(tabsPage.isTextVisible(tabsPage.getOriginText()));
     }
 
-    @Test(priority = 2)
+    @Test(priority = 4)
     public void useTab() {
-        tb.useB().click();
-        Assert.assertEquals(tb.useB().getAttribute("aria-selected"), "true");
-        Assert.assertEquals(tb.useT().getAttribute("class"), "fade tab-pane active show");
+        Assert.assertTrue(
+                tabsPage
+                        .useB()
+                        .isButtonSelected(tabsPage.getUseButton())
+        );
+        Assert.assertTrue(tabsPage.isTextVisible(tabsPage.getUseText()));
     }
 
-    @Test(priority = 2)
+    @Test(priority = 5)
     public void moreTab() {
-        Assert.assertEquals(tb.moreB().getAttribute("aria-disabled"),"true");
+        Assert.assertFalse(tabsPage.isButtonSelected(tabsPage.getMoreButton()));
     }
 }

@@ -1,66 +1,88 @@
 package objects.widgets;
 
+import lombok.Data;
 import objects.BasePage;
-import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class SelectMenus extends BasePage {
 
-    private WebDriver driver;
-    private List<WebElement> list;
-    private List<WebElement> oldList;
-    private List<WebElement> standartMulitlist;
+    @FindBy(xpath = "//span[contains(text(),'Select Menu')]")
+    private WebElement selectMenus;
+    @FindBy(xpath = "//div[@id='withOptGroup']")
+    private WebElement selectValue;
+    @FindBy(css = "#withOptGroup div.css-1uccc91-singleValue")
+    private WebElement selectedValue;
+    @FindBy(xpath = "//div[@class=' css-11unzgr']//child::div[@tabindex='-1']")
+    private List<WebElement> selectValueOptions;
+    @FindBy(xpath = "//div[@id='selectOne']")
+    private WebElement selectOne;
+    @FindBy(css = "#selectOne div.css-1uccc91-singleValue")
+    private WebElement selectedOne;
+    @FindBy(xpath = "//select[@id='oldSelectMenu']")
+    private WebElement selectOld;
+    @FindBy(xpath = "//select[@id='oldSelectMenu']//child::*")
+    private List<WebElement> selectOldOptions;
+    @FindBy(xpath = "//div[contains(text(),'Select...')]")
+    private WebElement multiSelect;
+    @FindBy(xpath = "//select[@id='cars']//child::*")
+    private List<WebElement> standardMultiSelectOptions;
+    @FindBy(xpath = "//select[@id='cars']")
+    private WebElement standardMultiSelect;
+
 
     public SelectMenus(WebDriver driver) {
-        this.driver = driver;
-        list = new ArrayList<>();
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Select Menu')]"));
+    public SelectMenus go() {
+        js.executeScript("window.scrollBy(0,250)");
+        selectMenus.click();
+        return this;
     }
 
-    public WebElement selectValue() {
-        return driver.findElement(By.xpath("//div[@id='withOptGroup']"));
+    public SelectMenus selectValue(String selectValueOption) {
+        selectValue.click();
+        multiSelectHelper(helpIterate(selectValueOption, selectValueOptions));
+        return this;
     }
 
-    public WebElement selectValueChoose(String selectValueOption) {
-        list = driver.findElements(By.xpath("//div[@class=' css-11unzgr']//child::div[@tabindex='-1']"));
-        return helpIterate(selectValueOption, list);
+    public SelectMenus selectOne(String selectOption) {
+        selectOne.click();
+        multiSelectHelper(helpIterate(selectOption, selectValueOptions));
+        return this;
+    }
+
+    public SelectMenus selectOldStyle(String selectOption) {
+        action.moveToElement(selectOld).click().perform();
+        multiSelectHelper(helpIterate(selectOption, selectOldOptions));
+        return this;
+    }
+
+    public SelectMenus multiSelect(String selectOption, String selectOption2) {
+        multiSelect.click();
+        multiSelectHelper(helpIterate(selectOption, selectValueOptions));
+        multiSelectHelper(helpIterate(selectOption2, selectValueOptions));
+        action.sendKeys(Keys.ESCAPE).perform();
+        return this;
     }
 
 
-    public WebElement selectOne() {
-        return driver.findElement(By.xpath("//div[@id='selectOne']"));
-    }
-
-    public WebElement oldStyle() {
-        return driver.findElement(By.xpath("//select[@id='oldSelectMenu']"));
-
-    }
-
-    public WebElement selectOldStyle(String selectOldOption) {
-        standartMulitlist = driver.findElements(By.xpath("//select[@id='oldSelectMenu']//child::*"));
-        return helpIterate(selectOldOption, standartMulitlist);
-    }
-
-    public WebElement multiSelect() {
-        return driver.findElement(By.xpath("//div[contains(text(),'Select...')]"));
-
-    }
-
-    public WebElement standartMulti() {
-        return driver.findElement(By.xpath("//select[@id='cars']"));
-    }
-
-    public WebElement standartMultiChoose(String selectOldOption) {
-        oldList = driver.findElements(By.xpath("//select[@id='cars']//child::*"));
-        return helpIterate(selectOldOption, oldList);
-
+    public SelectMenus standartMultiChoose(String selectOldOption, String selectOldOption2) {
+        multiSelectHelper(helpIterate(selectOldOption, standardMultiSelectOptions));
+        action
+                .keyDown(Keys.LEFT_CONTROL)
+                .moveToElement(helpIterate(selectOldOption2, standardMultiSelectOptions))
+                .click()
+                .release()
+                .perform();
+        return this;
     }
 
     private WebElement helpIterate(String selectValueOption, List<WebElement> list) {
@@ -71,4 +93,13 @@ public class SelectMenus extends BasePage {
         }
         return null;
     }
+
+    private void multiSelectHelper(WebElement webElement2) {
+        try {
+            webElement2.click();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

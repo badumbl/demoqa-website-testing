@@ -1,22 +1,33 @@
 package objects.widgets;
 
-import org.openqa.selenium.By;
+import lombok.Data;
+import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Slider {
+@Data
+public class Slider extends BasePage {
 
-    WebDriver driver;
+    @FindBy(xpath = "//span[contains(text(),'Slider')]")
+    WebElement sliderPage;
+    @FindBy(xpath = "//input[@class='range-slider range-slider--primary']")
+    WebElement slider;
+    @FindBy(xpath = " //input[@id='sliderValue']")
+    WebElement sliderValue;
 
     public Slider(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        driver.get(BASE_URL);
     }
 
-    public WebElement go() {
-        return driver.findElement(By.xpath("//span[contains(text(),'Slider')]"));
+    public Slider go() {
+        sliderPage.click();
+        return this;
     }
 
-    public WebElement slider() {
-        return driver.findElement(By.xpath("//input[@class='range-slider range-slider--primary']"));
+    public Slider moveSlider() {
+        action.dragAndDropBy(slider, 50, 0).perform();
+        return this;
     }
 }

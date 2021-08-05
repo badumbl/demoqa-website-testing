@@ -1,8 +1,7 @@
 package test.widgets;
 
 import objects.widgets.Slider;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
+import objects.widgets.Widgets;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,23 +9,30 @@ import test.BaseTest;
 
 public class TestSlider extends BaseTest {
 
-    private Slider sl;
+    private Slider sliderPage;
+    private Widgets wd;
 
     @BeforeClass
     public void init() {
-        sl = new Slider(driver);
+        wd = new Widgets(driver);
+        sliderPage = new Slider(driver);
+        super.passMainPage();
     }
 
     @Test(priority = 1)
     public void goTo() {
-        sl.go().click();
+        wd.go();
+        sliderPage.go();
     }
 
     @Test(priority = 2)
     public void moveSliderTo() {
-        new Actions(driver).dragAndDropBy(sl.slider(), 50, 0).perform();
-        Assert.assertEquals(driver.findElement(By.xpath("//input[@id='sliderValue']"))
-                .getAttribute("value"),"58");
+        Assert.assertEquals(
+                sliderPage
+                        .moveSlider()
+                        .getSliderValue().getAttribute("value"),
+                "58"
+        );
     }
 
 }

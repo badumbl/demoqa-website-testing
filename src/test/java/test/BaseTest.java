@@ -44,9 +44,9 @@ public class BaseTest {
     }
 
 
-    @AfterClass
+  /*  @AfterClass
     public void afterSuite() {
         driver.quit();
-    }
+    }*/
 
 }
