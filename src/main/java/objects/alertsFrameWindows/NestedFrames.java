@@ -29,6 +29,7 @@ public class NestedFrames extends BasePage {
     }
 
     public NestedFrames goTo() {
+        waitVisibility(nestedFramesPage);
         nestedFramesPage.click();
         return this;
     }

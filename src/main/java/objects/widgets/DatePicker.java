@@ -34,6 +34,7 @@ public class DatePicker extends BasePage {
 
     public DatePicker sDate(String day, String month, String year) {
         dayMonthYear.click();
+        waitVisibility(driver.findElement(By.xpath("//option[@value='" + year + "']")));
         driver.findElement(By.xpath("//option[@value='" + year + "']")).click();
         driver.findElement(By.xpath("//option[contains(text(),'" + month + "')]")).click();
         try {
@@ -46,6 +47,7 @@ public class DatePicker extends BasePage {
 
     public DatePicker sDateTime(String day, String month, String year, String hoursAndMinutes) {
         dateAndTime.click();
+        waitVisibility( driver.findElement(By.xpath("//span[@class='react-datepicker__year-read-view--selected-year']")));
         driver.findElement(By.xpath("//span[@class='react-datepicker__year-read-view--selected-year']")).click();
         driver.findElement(By.xpath("//div[@class='react-datepicker__year-dropdown']//*[contains(text(),'" + year + "')]")).click();
         driver.findElement(By.xpath("//span[@class='react-datepicker__month-read-view--selected-month']")).click();

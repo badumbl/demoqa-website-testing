@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Practice Suite" verbose="1" parallel="classes" thread-count="5">
+<suite name="Practice Suite" verbose="1">
     <!-- <test name="Test Main Page">
          <classes>
              <class name="test.TestMainPage"/>
@@ -41,9 +41,9 @@
              <class name="test.widgets.TestDatePicker"/>
              <class name="test.widgets.TestSlider"/>
              <class name="test.widgets.TestProgressBar"/>
-            <!-- <class name="test.widgets.TestTabs"/>
+             <class name="test.widgets.TestTabs"/>
              <class name="test.widgets.TestToolTips"/>
-             <class name="test.widgets.TestSelectMenus"/>-->
+             <class name="test.widgets.TestSelectMenus"/>
          </classes>
      </test>
     <test name="Test Interactions">
@@ -54,9 +54,9 @@
             <class name="test.interactions.TestDroppable"/>
         </classes>
     </test>
-     <test name="Test Book Store">
+    <!-- <test name="Test Book Store">
          <classes>
               <class name="test.bookStoreAppTest.TestBookStoreApp"/>
          </classes>
-     </test>
+     </test>-->
 </suite>

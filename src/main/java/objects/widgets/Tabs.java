@@ -5,6 +5,7 @@ import objects.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Data
 public class Tabs extends BasePage {
@@ -39,17 +40,20 @@ public class Tabs extends BasePage {
 
     public Tabs whatB() {
         whatButton.click();
+        waitVisibility(whatText);
         return this;
     }
 
     public Tabs originB() {
         originButton.click();
+        waitVisibility(originText);
         return this;
     }
 
 
     public Tabs useB() {
         useButton.click();
+        waitVisibility(useText);
         return this;
     }
 

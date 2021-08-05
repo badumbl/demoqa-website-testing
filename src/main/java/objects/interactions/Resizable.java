@@ -27,6 +27,8 @@ public class Resizable extends BasePage {
 
     public Resizable go() {
         resizablePage.click();
+        js.executeScript("arguments[0].scrollIntoView();", resizeInside);
+        waitVisibility(resizeInside);
         return this;
     }
 

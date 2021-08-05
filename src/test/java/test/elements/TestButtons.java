@@ -28,7 +28,7 @@ public class TestButtons extends BaseTest {
         buttonsPage.goButton();
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void checkDoubleClick() {
         Assert.assertEquals(
                 buttonsPage
@@ -38,7 +38,7 @@ public class TestButtons extends BaseTest {
         );
     }
 
-    @Test(priority = 2)
+    @Test(priority = 4)
     public void checkRightClick() {
         Assert.assertEquals(
                 buttonsPage

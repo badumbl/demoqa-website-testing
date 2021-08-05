@@ -23,11 +23,14 @@ public class Slider extends BasePage {
 
     public Slider go() {
         sliderPage.click();
+        waitVisibility(slider);
+        js.executeScript("arguments[0].scrollIntoView();", slider);
         return this;
     }
 
     public Slider moveSlider() {
         action.dragAndDropBy(slider, 50, 0).perform();
+       // wait.until(webDriver -> sliderValue.getAttribute("value").equals("58"));
         return this;
     }
 }

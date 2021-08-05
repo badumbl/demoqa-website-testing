@@ -1,6 +1,7 @@
 package objects.elements;
 
 import objects.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +31,7 @@ public class Buttons extends BasePage {
     public Buttons goButton() {
         buttonsPage.click();
         waitVisibility(doubleClickButton);
+        driver.findElement(By.cssSelector(".pattern-backgound")).click();
         return this;
     }
 

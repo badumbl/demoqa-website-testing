@@ -57,6 +57,8 @@ public class Droppable extends BasePage {
 
     public Droppable go() {
         droppablePage.click();
+        waitVisibility(simpleObj);
+        js.executeScript("arguments[0].scrollIntoView();", simpleObj);
         return this;
     }
 

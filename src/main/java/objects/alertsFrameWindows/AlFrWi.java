@@ -9,8 +9,8 @@ public class AlFrWi extends BasePage {
 
     @FindBy(xpath = "//div[contains(text(),'Alerts, Frame & Windows')]")
     private WebElement alFrWi;
-    @FindBy(xpath = "//span[contains(text(),'Alerts')]")
-    private WebElement alertPage;
+    @FindBy(xpath = "//span[contains(text(),'Modal Dialogs')]")
+    private WebElement modalPage;
 
     public AlFrWi(WebDriver driver) {
         super(driver);
@@ -19,7 +19,8 @@ public class AlFrWi extends BasePage {
     public AlFrWi go() {
         waitVisibility(alFrWi);
         alFrWi.click();
-        waitVisibility(alertPage);
+        js.executeScript("arguments[0].scrollIntoView();", modalPage);
+        waitVisibility(modalPage);
         return this;
     }
 }

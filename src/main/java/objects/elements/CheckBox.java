@@ -31,6 +31,7 @@ public class CheckBox extends BasePage {
     }
 
     public CheckBox checkReact() {
+        js.executeScript("arguments[0].scrollIntoView();", homeExpand);
         homeExpand.click();
         documentsExpand.click();
         workSpaceExpand.click();

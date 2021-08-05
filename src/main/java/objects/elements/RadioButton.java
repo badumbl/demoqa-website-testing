@@ -25,6 +25,7 @@ public class RadioButton extends BasePage {
 
     public RadioButton goToRadio() {
         radioButtonPage.click();
+        js.executeScript("arguments[0].scrollIntoView();", noButton);
         return this;
     }
 
@@ -39,6 +40,7 @@ public class RadioButton extends BasePage {
     }
 
     public RadioButton checkNo() {
+
         noButton.click();
         return this;
     }

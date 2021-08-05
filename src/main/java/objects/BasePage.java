@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @NoArgsConstructor
 public class BasePage {
     protected static final String BASE_URL = "https://demoqa.com/";
-    private static final long DEFAULT_TIMEOUT_SECONDS = 10;
+    private static final long DEFAULT_TIMEOUT_SECONDS = 15;
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -46,6 +46,7 @@ public class BasePage {
 
     protected void waitingExists(File f) {
         wait.until((WebDriver wd) -> f.exists());
+
     }
 
     protected void waitingClassValue(WebElement element, String value) {

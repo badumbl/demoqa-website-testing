@@ -20,6 +20,7 @@ public class ElementsMenu extends BasePage {
     public ElementsMenu goToElementsMenu() {
         waitVisibility(elementsMenuPage);
         elementsMenuPage.click();
+        js.executeScript("arguments[0].scrollIntoView();", dynamicPropertiesPage);
         waitVisibility(dynamicPropertiesPage);
         return this;
     }
