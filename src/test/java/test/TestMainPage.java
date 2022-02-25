@@ -1,8 +1,8 @@
 package test;
 
-import objects.MainPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pageObjects.MainPage;
 
 
 public class TestMainPage extends BaseTest {

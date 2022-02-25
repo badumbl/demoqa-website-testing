@@ -9,49 +9,49 @@
      </test>-->
      <test name="Test Elements">
          <classes>
-             <class name="test.elements.TestTextBox"/>
-             <class name="test.elements.TestCheckBox"/>
-             <class name="test.elements.TestRadioButton"/>
-             <class name="test.elements.TestWebTables"/>
-             <class name="test.elements.TestButtons"/>
-             <class name="test.elements.TestLinks"/>
-             <class name="test.elements.TestBrokenLinksImages"/>
-             <class name="test.elements.TestUploadAndDownload"/>
-             <class name="test.elements.TestDynamicProperties"/>
+             <class name="test.elements.TestTextBoxPage"/>
+             <class name="test.elements.TestCheckBoxPage"/>
+             <class name="test.elements.TestRadioButtonPage"/>
+             <class name="test.elements.TestWebTablesPage"/>
+             <class name="test.elements.TestButtonsPage"/>
+             <class name="test.elements.TestLinksPage"/>
+             <class name="test.elements.TestBrokenLinksImagesPage"/>
+             <class name="test.elements.TestUploadAndDownloadPage"/>
+             <class name="test.elements.TestDynamicPropertiesPage"/>
          </classes>
      </test>
      <test name="Test Practise Form">
          <classes>
-             <class name="test.forms.TestPracticeForm"/>
+             <class name="test.forms.TestPracticeFormPage"/>
          </classes>
      </test>
      <test name="Test Alerts, Frame and Windows">
          <classes>
-             <class name="test.alertsFrameWindows.TestBrowserWindows"/>
-             <class name="test.alertsFrameWindows.TestAlerts"/>
-             <class name="test.alertsFrameWindows.TestFrames"/>
-             <class name="test.alertsFrameWindows.TestNestedFrames"/>
-             <class name="test.alertsFrameWindows.TestModalDialogs"/>
+             <class name="test.alertsFrameWindows.TestBrowserWindowsPage"/>
+             <class name="test.alertsFrameWindows.TestAlertsPage"/>
+             <class name="test.alertsFrameWindows.TestFramesPage"/>
+             <class name="test.alertsFrameWindows.TestNestedFramesPage"/>
+             <class name="test.alertsFrameWindows.TestModalDialogsPage"/>
          </classes>
      </test>
      <test name="Test Widgets">
          <classes>
-             <class name="test.widgets.TestAccordian"/>
-             <class name="test.widgets.TestAutoComplete"/>
-             <class name="test.widgets.TestDatePicker"/>
-             <class name="test.widgets.TestSlider"/>
-             <class name="test.widgets.TestProgressBar"/>
-             <class name="test.widgets.TestTabs"/>
-             <class name="test.widgets.TestToolTips"/>
-             <class name="test.widgets.TestSelectMenus"/>
+             <class name="test.widgets.TestAccordianPage"/>
+             <class name="test.widgets.TestAutoCompletePage"/>
+             <class name="test.widgets.TestDatePickerPage"/>
+             <class name="test.widgets.TestSliderPage"/>
+             <class name="test.widgets.TestProgressBarPage"/>
+             <class name="test.widgets.TestTabsPage"/>
+             <class name="test.widgets.TestToolTipsPage"/>
+             <class name="test.widgets.TestSelectMenusPage"/>
          </classes>
      </test>
     <test name="Test Interactions">
         <classes>
-            <class name="test.interactions.TestSortable"/>
-            <class name="test.interactions.TestSelectable"/>
-            <class name="test.interactions.TestResizable"/>
-            <class name="test.interactions.TestDroppable"/>
+            <class name="test.interactions.TestSortableObjectPage"/>
+            <class name="test.interactions.TestSelectableObjectPage"/>
+            <class name="test.interactions.TestResizablePage"/>
+            <class name="test.interactions.TestDroppablePage"/>
         </classes>
     </test>
     <!-- <test name="Test Book Store">

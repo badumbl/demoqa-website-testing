@@ -1,9 +1,9 @@
 package test.bookStoreAppTest;
 
-import objects.bookStoreApp.BookStoreApp;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pageObjects.bookStoreApp.BookStoreApp;
 import test.BaseTest;
 
 public class TestBookStoreApp extends BaseTest {
@@ -17,7 +17,7 @@ public class TestBookStoreApp extends BaseTest {
     @BeforeClass
     public void init() {
         bsa = new BookStoreApp(driver);
-        super.passMainPage();
+        
     }
 
     @Test(priority = 1)
