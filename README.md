@@ -1,5 +1,12 @@
 # demoqa-website-testing
 
-Selenium, TestNG and Java practice by testing of the https://demoqa.com/ website
+Selenium, TestNG and Java project by testing of the https://demoqa.com/ website
 
-Each menu element of the site is tested as a separate page object.
+Reporting made using Allure
+
+How to start:
+clone project
+run TestNG.xml 
+
+for reporting:
+Maven - plugins - allure - allure:serve
