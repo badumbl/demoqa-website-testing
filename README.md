@@ -5,11 +5,9 @@ Reporting made using Allure
 
 How to start:
 
-clone project
-
-run TestNG.xml 
+clone project -> run TestNG.xml 
 
 
 for reporting:
 
-Maven - plugins - allure - allure:serve
+Maven -> plugins -> allure -> allure:serve
