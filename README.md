@@ -6,7 +6,9 @@ Reporting made using Allure
 How to start:
 
 clone project
+
 run TestNG.xml 
+
 
 for reporting:
 
